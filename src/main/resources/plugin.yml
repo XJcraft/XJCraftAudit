@@ -1,0 +1,61 @@
+name: XJCraftAudit
+main: org.jim.bukkit.audit.AuditPlugin
+description: This plugin is created for XJcraft server
+author: jim_
+version: 1.3.6
+commands:
+   xjcraft: 
+      usage: /<command> [options]
+      permission-message: You don't have <permission>
+   xj: 
+      usage: /<command> [options]
+      permission-message: You don't have <permission>
+   rename:
+      usage: /<command> [options]
+permissions: 
+  xjcraft.apply: 
+    default: true
+  xjcraft.give: 
+    default: op
+  xjcraft.gc: 
+    default: op
+  xjcraft.clear: 
+    default: op
+  xjcraft.basement: 
+    default: op
+  xjcraft.status: 
+    default: op
+  xjcraft.check: 
+    default: op
+  xjcraft.checkall: 
+    default: op
+  xjcraft.help: 
+    default: true
+  xjcraft.chunk: 
+    default: op
+  xjcraft.rcd: 
+    default: op
+  xjcraft.reload: 
+    default: op
+  xjcraft.signunbreak: 
+    default: op
+  xjcraft.runscript: 
+    default: op
+  xjcraft.fix: 
+    default: op
+  xjcraft.plugin: 
+    default: op
+  xjcraft.sign.create: 
+    default: true
+  xjcraft.sign.destory: 
+    default: true
+  xjcraft.sign.use: 
+    default: true
+  xjcraft.sign.lookup: 
+    default: true
+  xjcraft.spectate: 
+    default: op
+  xjcraft.rename: 
+    default: true
+  xjcraft.menu: 
+    default: true
