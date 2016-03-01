@@ -75,7 +75,7 @@ public class Util {
 		
 	}*/
 
-	protected static void to(String str, Player p) throws Exception {
+	public static void setDisplayName(Player p, String str) throws Exception {
 		String nick = p.getDisplayName() == null ? p.getName() : p
 				.getDisplayName();
 		String prefix = AuditPlugin.getPlugin().getConfig().getString(str);

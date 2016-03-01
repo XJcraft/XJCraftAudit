@@ -1,15 +1,5 @@
 package org.jim.bukkit.audit.apply;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
-import javax.rmi.CORBA.Util;
-
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,6 +13,14 @@ import org.jim.bukkit.audit.IModule;
 import org.jim.bukkit.audit.PlayerMeta;
 import org.jim.bukkit.audit.Status;
 import org.jim.bukkit.audit.util.Logs;
+import org.jim.bukkit.audit.util.Util;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
 
 
 public class ApplyHelper extends IModule {
@@ -295,11 +293,11 @@ public class ApplyHelper extends IModule {
 			public void run() {
 				try {
 					if (p.isOp()) {
-						to("nickname-prefix.op", p);
+						Util.setDisplayName(p, "nickname-prefix.op");
 					} else if (AuditPlugin.getPlugin().getHelper().isApply(p)) {
-						to("nickname-prefix.applied", p);
+						Util.setDisplayName(p, "nickname-prefix.applied");
 					} else {
-						to("nickname-prefix.unapplied", p);
+						Util.setDisplayName(p, "nickname-prefix.unapplied");
 					}
 				} catch (Exception e) {
 					AuditPlugin
@@ -314,27 +312,6 @@ public class ApplyHelper extends IModule {
 
 	}
 
-	protected static void to(String str, Player p) throws Exception {
-		String nick = p.getDisplayName() == null ? p.getName() : p
-				.getDisplayName();
-		String prefix = AuditPlugin.getPlugin().getConfig().getString(str);
-		prefix = prefix.replace('&', ChatColor.COLOR_CHAR);
-		String output = prefix + nick + ChatColor.RESET;
-		p.setDisplayName(output);
-		if (output.length() > 16) {
-			output = prefix + nick; // 长度大于16时不使用后缀
-		}
-		if (output.length() > 16) {
-			output = lastCode(prefix) + nick;// 去掉后缀仍过长，保留前缀最后的ChatColor
-		}
-		if ((output.length() > 16)) {
-			output = lastCode(prefix) + nick.substring(0, 14);// nickName截掉了，保留前缀最后的ChatColor
-		}
-		if (output.charAt(output.length() - 1) == '§') {// 若以§结尾则去掉
-			output = output.substring(0, output.length() - 1);
-		}
-		p.setPlayerListName(output);
-	}
 
 	public static String lastCode(String input) {
 		int pos = input.lastIndexOf("§");
