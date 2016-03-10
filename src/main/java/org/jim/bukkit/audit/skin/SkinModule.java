@@ -79,7 +79,7 @@ public class SkinModule extends IModule implements Listener {
         try {
             MinecraftTexturesPayload payload = new MinecraftTexturesPayload();
             Gson gson = new Gson();
-            String url = "http://mc.0ydy.com/api/skin/" + name;
+            String url = "http://bbs.xjcraft.org/api/skin/" + name;
             String json = HttpUtil.get(url);
 
             Map propertyMap = new HashMap();
