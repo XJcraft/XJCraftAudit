@@ -7,6 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.util.Logs;
 
+import java.util.Arrays;
+
 public class PlayerApplyEvent extends Event {
 	
 	private static HandlerList list = new HandlerList();
@@ -17,7 +19,7 @@ public class PlayerApplyEvent extends Event {
 	public PlayerApplyEvent(Player p){
 		this.applyPlayer = p;
 		unaccepts = AuditPlugin.getPlugin().getMaterialAudit().accept(applyPlayer);
-		Logs.info(p.getName()+" trigger PlayApplyEvent,unaccept armorContents: "+unaccepts);
+		Logs.info(p.getName()+" trigger PlayApplyEvent,unaccept armorContents: "+ unaccepts.length+", "+Arrays.toString(unaccepts));
 	}
 
 	@Override

@@ -186,7 +186,7 @@ public class ApplyListener implements Listener {
 					player.sendMessage(helper.getPlugin().getMessage(
 							"message.tip"));
 				} else {
-					player.getWorld().playSound(player.getLocation(), Sound.LEVEL_UP, .5f, .8f);
+					player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, .5f, .8f);
 					// give command block
 					giveCmdBlock(player);
 					player.sendMessage(helper.getPlugin().getMessage(

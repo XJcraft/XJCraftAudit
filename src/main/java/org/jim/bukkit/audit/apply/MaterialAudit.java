@@ -42,7 +42,9 @@ public class MaterialAudit {
 	public ItemStack[] accept(ItemStack[] items) {
 		List<ItemStack> unaccepts = new ArrayList<ItemStack>();
 		for (ItemStack item : items) {
-			if (!materials.contains(item.getType())) {
+			if (item == null) {
+				unaccepts.add(item);
+			} else if (!materials.contains(item.getType())) {
 				unaccepts.add(item);
 				//AuditPlugin.getPlugin().info(item + " 不符合");
 			}

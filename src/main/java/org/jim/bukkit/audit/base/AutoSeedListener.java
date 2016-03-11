@@ -82,7 +82,7 @@ public class AutoSeedListener implements Listener{
 				if(Material.AIR == up.getType() && --total>=0){
 					up.setType(Material.CROPS);
 					remove++;
-					world.playSound(up.getLocation(), Sound.LEVEL_UP, 0.1f, .2f);
+					world.playSound(up.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.1f, .2f);
 					world.playEffect(up.getLocation(), Effect.SMOKE, 0);
 					try {
 						Thread.sleep(100);
