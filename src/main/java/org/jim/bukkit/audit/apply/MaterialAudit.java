@@ -46,7 +46,6 @@ public class MaterialAudit {
 				unaccepts.add(item);
 			} else if (!materials.contains(item.getType())) {
 				unaccepts.add(item);
-				//AuditPlugin.getPlugin().info(item + " 不符合");
 			}
 		}
 		return unaccepts.toArray(new ItemStack[0]);

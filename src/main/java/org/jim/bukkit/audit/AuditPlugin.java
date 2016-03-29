@@ -61,11 +61,6 @@ public class AuditPlugin extends JavaPluginFix {
 		modules.add(new EntityControl(this));
 		modules.add(new SkinModule(this));
 		modules.add(new RedstoneClockDetector(this));
-		//modules.add(new MenuModule(this));
-		/*modules.add(new Spectates(this));
-		modules.add(new AntiXray(this));
-		modules.add(new Motds(this));
-		modules.add(new Performance(this));*/
 	}
 
 	@Override
