@@ -37,22 +37,23 @@ public class RunScriptCmd extends ICmd {
 				sender.sendMessage("执行: " + f.getAbsolutePath() + "...");
 				log.info("running script: " + f);
 				FileExecutor fe = new FileExecutor(new Writer() {
-					
+
 					@Override
-					public void write(char[] cbuf, int off, int len) throws IOException {
+					public void write(char[] cbuf, int off, int len)
+							throws IOException {
 						String text = new String(cbuf, off, len);
 						sender.sendMessage(text);
 						log.info(text);
 					}
-					
+
 					@Override
 					public void flush() throws IOException {
-						
+
 					}
-					
+
 					@Override
 					public void close() throws IOException {
-						
+
 					}
 				});
 				fe.exec(f);

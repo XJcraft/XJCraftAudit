@@ -16,15 +16,15 @@ public class Check extends ICmd {
 		int radius = AuditPlugin.getPlugin().getConfig()
 				.getInt("entityCheck.radius", 100);
 		Player p = (sender instanceof Player) ? (Player) sender : null;
-		Player onLinePlayer = (args != null && args.length > 0) ? AuditPlugin
-				.getPlugin().getServer().getPlayer(args[0]) : p;
+		Player onLinePlayer = (args != null && args.length > 0)
+				? AuditPlugin.getPlugin().getServer().getPlayer(args[0]) : p;
 		if (onLinePlayer == null) {
 			sender.sendMessage("玩家不存在或未在线");
 			return true;
 		}
 		try {
-			radius = (args != null && args.length > 1) ? Integer
-					.parseInt(args[1]) : radius;
+			radius = (args != null && args.length > 1)
+					? Integer.parseInt(args[1]) : radius;
 		} catch (NumberFormatException e) {
 		}
 		EntityCheck c = new EntityCheck();

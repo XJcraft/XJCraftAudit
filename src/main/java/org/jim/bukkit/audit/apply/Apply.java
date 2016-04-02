@@ -8,7 +8,7 @@ import org.jim.bukkit.audit.cmds.ICmd;
 public class Apply extends ICmd {
 
 	public Apply() {
-		super("apply","","申请考核");
+		super("apply", "", "申请考核");
 	}
 
 	@Override

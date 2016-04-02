@@ -16,14 +16,15 @@ public class PlayerMeta extends Storeable {
 
 	private Status status = Status.UNAPPLIED;
 	private long applyTime;
-	private Map<String, LocationRef> locations = new HashMap<String, LocationRef>();
+	private Map<String, LocationRef> locations =
+			new HashMap<String, LocationRef>();
 	private File dataFile;
 	private String player;
-	
+
 	@Override
 	public MemorySection serial(MemorySection yaml) {
 		yaml.set("status", status.getType());
-		if(applyTime!= 0)
+		if (applyTime != 0)
 			yaml.set("apply-time", applyTime);
 		for (Map.Entry<String, LocationRef> e : locations.entrySet()) {
 			LocationUtil.putLocation(yaml, e.getValue(),
@@ -37,9 +38,10 @@ public class PlayerMeta extends Storeable {
 		status = Status.get(yaml.getInt("status", 1));
 		applyTime = yaml.getLong("apply-time");
 		MemorySection section = (MemorySection) yaml.get("locations");
-		if(section!=null)
-			for(String key : section.getKeys(false)){
-				locations.put(key, LocationUtil.getLocationRef(yaml, "locations."+key));
+		if (section != null)
+			for (String key : section.getKeys(false)) {
+				locations.put(key,
+						LocationUtil.getLocationRef(yaml, "locations." + key));
 			}
 	}
 
@@ -59,9 +61,9 @@ public class PlayerMeta extends Storeable {
 
 	public Location getLocation(String key) {
 		LocationRef ref = locations.get(key);
-		return ref == null? null:ref.getRef();
+		return ref == null ? null : ref.getRef();
 	}
-	
+
 	public LocationRef getLocationRef(String key) {
 		return locations.get(key);
 	}
@@ -70,7 +72,7 @@ public class PlayerMeta extends Storeable {
 		this.locations.put(key, new LocationRef(location));
 	}
 
-	public void removeLocation(String key){
+	public void removeLocation(String key) {
 		this.locations.remove(key);
 	}
 
@@ -81,17 +83,18 @@ public class PlayerMeta extends Storeable {
 	public void setApplyTime(long applyTime) {
 		this.applyTime = applyTime;
 	}
+
 	@Override
 	public void load(File file) throws FileNotFoundException, IOException,
 			InvalidConfigurationException {
 		super.load(file);
 		this.dataFile = file;
-		String fileName =  file.getName();
+		String fileName = file.getName();
 		this.player = fileName.substring(0, fileName.lastIndexOf("."));
 	}
-	
+
 	public void save() throws IOException {
-		if(dataFile!=null)
+		if (dataFile != null)
 			super.save(dataFile);
 	}
 
@@ -119,7 +122,7 @@ public class PlayerMeta extends Storeable {
 		this.player = player;
 	}
 
-	public boolean containsLocation(String key){
+	public boolean containsLocation(String key) {
 		return locations.containsKey(key);
 	}
 }

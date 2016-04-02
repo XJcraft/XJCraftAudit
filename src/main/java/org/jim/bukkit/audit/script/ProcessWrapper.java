@@ -4,7 +4,7 @@ import java.io.IOException;
 
 
 public class ProcessWrapper {
-	
+
 	private Process process;
 
 	public ProcessWrapper(Process process) {
@@ -20,9 +20,10 @@ public class ProcessWrapper {
 		new Thread(new ProcessMonitor(this)).start();
 	}
 
-	public void log(String msg){
-		
+	public void log(String msg) {
+
 	}
+
 	public void stop() {
 		if (process != null)
 			this.process.destroy();

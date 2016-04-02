@@ -21,8 +21,8 @@ public class Chunk extends ICmd {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		if(args !=null && args.length>0){
-			if("unload".equalsIgnoreCase(args[0])){
+		if (args != null && args.length > 0) {
+			if ("unload".equalsIgnoreCase(args[0])) {
 				int chunkcount = 0;
 				World[] worlds = (World[]) Bukkit.getServer().getWorlds()
 						.toArray(new World[0]);
@@ -33,22 +33,24 @@ public class Chunk extends ICmd {
 						}
 					}
 				}
-				sender.sendMessage(ChatColor.GOLD.toString() + chunkcount + ChatColor.AQUA
-						+ " chunks 被卸载!");
+				sender.sendMessage(ChatColor.GOLD.toString() + chunkcount
+						+ ChatColor.AQUA + " chunks 被卸载!");
 				return true;
-			}else if("list".equalsIgnoreCase(args[0])){
+			} else if ("list".equalsIgnoreCase(args[0])) {
 				int num = 10;
 				try {
-					num = (args!=null &&args.length>1)?Integer.parseInt(args[1]):num;
+					num = (args != null && args.length > 1)
+							? Integer.parseInt(args[1]) : num;
 				} catch (NumberFormatException e) {
-					
+
 				}
-				Map<org.bukkit.Chunk, ChunkCount> map = new HashMap<org.bukkit.Chunk, ChunkCount>();
-				for(World world : Bukkit.getWorlds()){
-					for(Entity entity : world.getEntities()){
+				Map<org.bukkit.Chunk, ChunkCount> map =
+						new HashMap<org.bukkit.Chunk, ChunkCount>();
+				for (World world : Bukkit.getWorlds()) {
+					for (Entity entity : world.getEntities()) {
 						org.bukkit.Chunk c = entity.getLocation().getChunk();
 						ChunkCount cc = map.get(c);
-						if(cc == null){
+						if (cc == null) {
 							cc = new ChunkCount(c);
 							map.put(c, cc);
 						}
@@ -59,11 +61,14 @@ public class Chunk extends ICmd {
 				StringBuffer m = new StringBuffer();
 				Iterator<ChunkCount> it = set.iterator();
 				m.append("------ Chunk Info ------\n");
-				while(num>0 && it.hasNext()){
+				while (num > 0 && it.hasNext()) {
 					ChunkCount c = it.next();
-					m.append("Chunk"+ ChatColor.BLUE +"[World:" + c.getChunk().getWorld().getName()+ ",x:" + c.getChunk().getX()+",z:" +c.getChunk().getZ()+ "]"
-							+ ChatColor.WHITE + "  Entitys: " + ChatColor.RED
-							+ c.getCount() + ChatColor.WHITE + "\n");
+					m.append("Chunk" + ChatColor.BLUE + "[World:"
+							+ c.getChunk().getWorld().getName() + ",x:"
+							+ c.getChunk().getX() + ",z:" + c.getChunk().getZ()
+							+ "]" + ChatColor.WHITE + "  Entitys: "
+							+ ChatColor.RED + c.getCount() + ChatColor.WHITE
+							+ "\n");
 					num--;
 				}
 				sender.sendMessage(m.toString());

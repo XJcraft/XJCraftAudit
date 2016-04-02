@@ -21,7 +21,7 @@ public class RedstoneClockDetector extends IModule implements Listener {
 	private static RedstoneClockDetector instance;// = new RedstoneClockDetector();
 	private Map<Location, RestoneRecord> records = new HashMap<>();
 	private boolean enable = false;
-	//private static Map<String, RedstoneClockDetector> instances = new HashMap<>();
+	// private static Map<String, RedstoneClockDetector> instances = new HashMap<>();
 
 
 	public void add(Block block) {
@@ -53,11 +53,11 @@ public class RedstoneClockDetector extends IModule implements Listener {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	
+
 	@EventHandler
 	public void onRestone(BlockRedstoneEvent event) {
-		//为了节省资源，rcd采用单例，所以管理员之间同时使用会造成干扰
-		RedstoneClockDetector rcd =this;// RedstoneClockDetector.me();
+		// 为了节省资源，rcd采用单例，所以管理员之间同时使用会造成干扰
+		RedstoneClockDetector rcd = this;// RedstoneClockDetector.me();
 		if (rcd.isEnable()) {
 			rcd.add(event.getBlock());
 		}
@@ -76,14 +76,15 @@ public class RedstoneClockDetector extends IModule implements Listener {
 
 		void add() {
 			count++;
-			//updateTime();
+			// updateTime();
 		}
 
 		@Override
 		public int compareTo(RestoneRecord o) {
 			return o.count - count;
 		}
-		public void updateTime(){
+
+		public void updateTime() {
 			lastTime = System.currentTimeMillis();
 		}
 
@@ -112,6 +113,6 @@ public class RedstoneClockDetector extends IModule implements Listener {
 
 	@Override
 	public void onDisable() {
-		
+
 	}
 }

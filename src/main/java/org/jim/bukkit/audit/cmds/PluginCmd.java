@@ -22,18 +22,19 @@ public class PluginCmd extends ICmd {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, String[] args){
-		if(args.length<2) return false;
-		try{
-		if("load".equalsIgnoreCase(args[0])){
-			loadPlugin(args[1], sender);
-		}else if("unload".equalsIgnoreCase(args[0])){
-			unloadPlugin(args[1], sender);
-		}else if("reload".equalsIgnoreCase(args[0])){
-			reloadPlugin(args[1], sender);
-		}
-		}catch(Exception e){
-			sender.sendMessage(ChatColor.RED+"错误："+e.getMessage());
+	public boolean onCommand(CommandSender sender, String[] args) {
+		if (args.length < 2)
+			return false;
+		try {
+			if ("load".equalsIgnoreCase(args[0])) {
+				loadPlugin(args[1], sender);
+			} else if ("unload".equalsIgnoreCase(args[0])) {
+				unloadPlugin(args[1], sender);
+			} else if ("reload".equalsIgnoreCase(args[0])) {
+				reloadPlugin(args[1], sender);
+			}
+		} catch (Exception e) {
+			sender.sendMessage(ChatColor.RED + "错误：" + e.getMessage());
 		}
 		return true;
 	}
@@ -46,12 +47,12 @@ public class PluginCmd extends ICmd {
 	private boolean loadPlugin(String pluginName, CommandSender sender) {
 		try {
 			PluginManager manager = Bukkit.getServer().getPluginManager();
-			Plugin plugin = manager.loadPlugin(new File("plugins", pluginName
-					+ ".jar"));
+			Plugin plugin = manager
+					.loadPlugin(new File("plugins", pluginName + ".jar"));
 
 			if (plugin == null) {
-				sender.sendMessage(String.format(ChatColor.RED
-						+ "加载插件失败，%s 不存在", pluginName));
+				sender.sendMessage(String
+						.format(ChatColor.RED + "加载插件失败，%s 不存在", pluginName));
 				return false;
 			}
 
@@ -72,28 +73,28 @@ public class PluginCmd extends ICmd {
 		SimplePluginManager spmanager = (SimplePluginManager) manager;
 
 		if (spmanager != null) {
-			Field pluginsField = spmanager.getClass().getDeclaredField(
-					"plugins");
+			Field pluginsField =
+					spmanager.getClass().getDeclaredField("plugins");
 			pluginsField.setAccessible(true);
 			List plugins = (List) pluginsField.get(spmanager);
 
-			Field lookupNamesField = spmanager.getClass().getDeclaredField(
-					"lookupNames");
+			Field lookupNamesField =
+					spmanager.getClass().getDeclaredField("lookupNames");
 			lookupNamesField.setAccessible(true);
 			Map lookupNames = (Map) lookupNamesField.get(spmanager);
 
-			Field commandMapField = spmanager.getClass().getDeclaredField(
-					"commandMap");
+			Field commandMapField =
+					spmanager.getClass().getDeclaredField("commandMap");
 			commandMapField.setAccessible(true);
-			SimpleCommandMap commandMap = (SimpleCommandMap) commandMapField
-					.get(spmanager);
+			SimpleCommandMap commandMap =
+					(SimpleCommandMap) commandMapField.get(spmanager);
 
 			Field knownCommandsField = null;
 			Map knownCommands = null;
 
 			if (commandMap != null) {
-				knownCommandsField = commandMap.getClass().getDeclaredField(
-						"knownCommands");
+				knownCommandsField =
+						commandMap.getClass().getDeclaredField("knownCommands");
 				knownCommandsField.setAccessible(true);
 				knownCommands = (Map) knownCommandsField.get(commandMap);
 			}
@@ -108,7 +109,8 @@ public class PluginCmd extends ICmd {
 				plugins.remove(plugin);
 			}
 
-			if ((lookupNames != null) && (lookupNames.containsKey(pluginName))) {
+			if ((lookupNames != null)
+					&& (lookupNames.containsKey(pluginName))) {
 				lookupNames.remove(pluginName);
 			}
 
@@ -118,8 +120,8 @@ public class PluginCmd extends ICmd {
 					Map.Entry entry = (Map.Entry) it.next();
 
 					if ((entry.getValue() instanceof PluginCommand)) {
-						PluginCommand command = (PluginCommand) entry
-								.getValue();
+						PluginCommand command =
+								(PluginCommand) entry.getValue();
 
 						if (command.getPlugin() == plugin) {
 							command.unregister(commandMap);

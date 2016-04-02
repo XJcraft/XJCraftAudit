@@ -10,19 +10,19 @@ public class MenuFolder extends MenuItem {
 	public MenuFolder(String label) {
 		super(label);
 	}
-	 
-	 public void addItem(MenuItem item){
-		 item.parent = this;
-		 this.childs.add(item);
-	 }
-	 
-	 public void removeItem(MenuItem item){
-		 item.parent = null;
-		 this.childs.remove(item);
-	 }
+
+	public void addItem(MenuItem item) {
+		item.parent = this;
+		this.childs.add(item);
+	}
+
+	public void removeItem(MenuItem item) {
+		item.parent = null;
+		this.childs.remove(item);
+	}
 
 	public List<MenuItem> getChilds() {
 		return childs;
 	}
-	 
+
 }

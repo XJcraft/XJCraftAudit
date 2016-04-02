@@ -17,11 +17,12 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 public class SignUnbreakingListener implements Listener {
 
 	private static final String MESSAGE = ChatColor.AQUA + "这个木牌好耐操啊~~";
-	private static final BlockFace[] FACES2 = { BlockFace.NORTH,
-			BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST, BlockFace.UP,
-			BlockFace.DOWN };
+	private static final BlockFace[] FACES2 =
+			{ BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST,
+					BlockFace.UP, BlockFace.DOWN };
 
-	protected SignUnbreakingListener(){}
+	protected SignUnbreakingListener() {}
+
 	@EventHandler
 	public void onSignChange(SignChangeEvent event) {
 		if (matchPattern(event.getLine(0))) {

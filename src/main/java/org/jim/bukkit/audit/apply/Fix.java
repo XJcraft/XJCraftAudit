@@ -35,16 +35,14 @@ public class Fix extends ICmd {
 		}
 		Player sendPlayer = (Player) sender;
 		Location location = sendPlayer.getLocation();
-		//OfflinePlayer oplayer = Bukkit.getOfflinePlayer(args[1]);
+		// OfflinePlayer oplayer = Bukkit.getOfflinePlayer(args[1]);
 
 		// base town basecmd
 		Block cmd = getBlock(location, Material.COMMAND, radius);
-		Assert.notNull(
-				cmd,
-				String.format("未找到命令方块!(l: %s,r: %s)",
-						LocationUtil.toString(location), radius));
+		Assert.notNull(cmd, String.format("未找到命令方块!(l: %s,r: %s)",
+				LocationUtil.toString(location), radius));
 
-		Location base = null, town = null, basecmd = null,towncmd = null;
+		Location base = null, town = null, basecmd = null, towncmd = null;
 		if ("base".equals(args[0])) {
 			// commandblock --> location
 			sender.sendMessage("基地 --> 小镇");
@@ -53,14 +51,14 @@ public class Fix extends ICmd {
 			town = getCmdLocation((CommandBlock) cmd.getState());
 			Assert.notNull(town, "命令方块中未发现坐标！！");
 			sender.sendMessage("--找到:  小镇 " + LocationUtil.toString(town));
-			//sender.sendMessage("小镇 --> 基地");
+			// sender.sendMessage("小镇 --> 基地");
 			CommandBlock townCmd = getCmdBlock(town, radius);
-			//Assert.notNull(towncmd, "命令方块中未发现坐标！！");
-			if(townCmd!=null){
+			// Assert.notNull(towncmd, "命令方块中未发现坐标！！");
+			if (townCmd != null) {
 				towncmd = townCmd.getLocation();
-				//base = getCmdLocation(townCmd);
-			}else{
-				sender.sendMessage(ChatColor.RED+"未发现小镇的命令方块！");
+				// base = getCmdLocation(townCmd);
+			} else {
+				sender.sendMessage(ChatColor.RED + "未发现小镇的命令方块！");
 			}
 		} else if ("town".equals(args[0])) {
 			// commandblock --> location
@@ -70,39 +68,41 @@ public class Fix extends ICmd {
 			base = getCmdLocation((CommandBlock) cmd.getState());
 			sender.sendMessage("--找到:  基地 " + LocationUtil.toString(base));
 			CommandBlock baseCmd = getCmdBlock(base, radius);
-			if (baseCmd != null){
+			if (baseCmd != null) {
 				basecmd = baseCmd.getLocation();
-			}else{
-				sender.sendMessage(ChatColor.RED+"未发现基地的命令方块！");
+			} else {
+				sender.sendMessage(ChatColor.RED + "未发现基地的命令方块！");
 			}
 		} else {
 			sender.sendMessage(ChatColor.RED + args[0] + " 未定义");
 			return true;
 		}
-		if(base!=null){
+		if (base != null) {
 			update(sender, args[1], "base-location", base);
 		}
-		if(town!=null){
+		if (town != null) {
 			update(sender, args[1], "town-cmdlocation", town);
 		}
-		if(basecmd !=null){
+		if (basecmd != null) {
 			update(sender, args[1], "base-cmdlocation", basecmd);
 		}
-		if( basecmd !=null && town !=null)
-			org.jim.bukkit.audit.util.Util.setCmdBlock(basecmd.getBlock(), town);
-		if( towncmd !=null && base !=null)
-			org.jim.bukkit.audit.util.Util.setCmdBlock(towncmd.getBlock(), base);
+		if (basecmd != null && town != null)
+			org.jim.bukkit.audit.util.Util.setCmdBlock(basecmd.getBlock(),
+					town);
+		if (towncmd != null && base != null)
+			org.jim.bukkit.audit.util.Util.setCmdBlock(towncmd.getBlock(),
+					base);
 		sender.sendMessage("资料更新成功!");
 		return true;
 	}
 
 	private void update(CommandSender sender, String oplayer, String string,
 			Location loc) {
-		//Logs.info(String.format("update %s '%s'--> %s", oplayer, string,
-				//LocationUtil.toString(loc)));
+		// Logs.info(String.format("update %s '%s'--> %s", oplayer, string,
+		// LocationUtil.toString(loc)));
 		if (loc != null) {
-			AuditPlugin.getPlugin().getHelper()
-					.setPlayerLocation(oplayer, string, loc);
+			AuditPlugin.getPlugin().getHelper().setPlayerLocation(oplayer,
+					string, loc);
 		}
 	}
 
@@ -131,8 +131,8 @@ public class Fix extends ICmd {
 		return null;
 	}
 
-	private static Pattern p = Pattern
-			.compile("([\\-\\d]+)\\s+([\\-\\d]+)\\s+([\\-\\d]+)");
+	private static Pattern p =
+			Pattern.compile("([\\-\\d]+)\\s+([\\-\\d]+)\\s+([\\-\\d]+)");
 
 	public Location getCmdLocation(CommandBlock cmd) {
 		String line = cmd.getCommand();

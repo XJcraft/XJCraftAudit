@@ -20,17 +20,17 @@ public class DefaultListener implements Listener {
 		if (lines != null) {
 			for (int i = 0; i < lines.length; i++)
 				if (lines[i] != null)
-					event.setLine(i, ChatColor.translateAlternateColorCodes(
-							'&', lines[i]));
+					event.setLine(i, ChatColor.translateAlternateColorCodes('&',
+							lines[i]));
 		}
 	}
 
 	/**
-	 * 禁止除主世界的实体传送 Cancel event when a non-player entity contacting with a
-	 * portal about to teleport
+	 * 禁止除主世界的实体传送 Cancel event when a non-player entity contacting with a portal about to teleport
+	 * 
 	 * @param event
 	 */
-	@EventHandler(ignoreCancelled=true)
+	@EventHandler(ignoreCancelled = true)
 	public void onEntityPortal(EntityPortalEvent event) {
 		if (event.getTo() != null) {
 			// 1 来处非主世界 2 去处为末地
@@ -46,10 +46,10 @@ public class DefaultListener implements Listener {
 				Command.broadcastCommandMessage(Bukkit.getConsoleSender(),
 						LocationUtil.toString(event.getFrom()) + " 试图传送实体 "
 								+ event.getEntity());
-				if(event.getEntity() instanceof LivingEntity){
-					LivingEntity e = (LivingEntity)event.getEntity();
+				if (event.getEntity() instanceof LivingEntity) {
+					LivingEntity e = (LivingEntity) event.getEntity();
 					e.damage(e.getHealth());
-				}else{
+				} else {
 					event.getEntity().remove();
 				}
 			}

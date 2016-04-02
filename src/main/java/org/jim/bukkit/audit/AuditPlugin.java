@@ -33,9 +33,10 @@ public class AuditPlugin extends JavaPluginFix {
 	public ApplyHelper helper = null;
 
 	private static AuditPlugin instance;
-	private List<IModule> modules = new ArrayList<IModule>(){
+	private List<IModule> modules = new ArrayList<IModule>() {
 		public boolean add(IModule e) {
-			AuditPlugin.instance.getLogger().info("Add Module :"+e.getClass());
+			AuditPlugin.instance.getLogger()
+					.info("Add Module :" + e.getClass());
 			return super.add(e);
 		};
 	};
@@ -61,7 +62,7 @@ public class AuditPlugin extends JavaPluginFix {
 
 	@Override
 	public void onDisable() {
-		for(IModule m : modules)
+		for (IModule m : modules)
 			m.onDisable();
 		super.onDisable();
 	}
@@ -72,14 +73,14 @@ public class AuditPlugin extends JavaPluginFix {
 		commandHandler = new CommandHandler(this);
 		getCommand("xjcraft").setExecutor(commandHandler);
 		getCommand("xj").setExecutor(commandHandler);
-		for(IModule m : modules){
+		for (IModule m : modules) {
 			m.onEnable();
 		}
 		registerEvents(new DefaultListener());
 		registerEvents(new AutoSeedListener());
 	}
-	
-	public void registerEvents(Listener listener){
+
+	public void registerEvents(Listener listener) {
 		getServer().getPluginManager().registerEvents(listener, this);
 	}
 
@@ -88,8 +89,9 @@ public class AuditPlugin extends JavaPluginFix {
 		super.reloadConfig();
 		getLogger().info("Reloading " + getName());
 		materialAudit.clearMaterial();
-		materialAudit.addMaterials(getConfig().getIntegerList("accept-armorContent"));
-		for(IModule m : modules)
+		materialAudit.addMaterials(
+				getConfig().getIntegerList("accept-armorContent"));
+		for (IModule m : modules)
 			m.reloadConfig();
 	}
 
@@ -121,6 +123,7 @@ public class AuditPlugin extends JavaPluginFix {
 	public CommandHandler getCommandHandler() {
 		return commandHandler;
 	}
+
 	public String getMessage(String path) {
 		return this.getConfig().getString(path);
 	}
