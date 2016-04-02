@@ -1,5 +1,12 @@
 package org.jim.bukkit.audit.apply;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -15,13 +22,6 @@ import org.jim.bukkit.audit.Status;
 import org.jim.bukkit.audit.util.Logs;
 import org.jim.bukkit.audit.util.Util;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
 
 public class ApplyHelper extends IModule {
 
@@ -30,7 +30,8 @@ public class ApplyHelper extends IModule {
 	public static final String LOCATION_CMDTOWN = "town-cmdlocation";
 	public static final String LOCATION_CMDBASE = "base-cmdlocation";
 
-	private Map<String, SoftReference<PlayerMeta>> metas = new HashMap<String, SoftReference<PlayerMeta>>();
+	private Map<String, SoftReference<PlayerMeta>> metas =
+			new HashMap<String, SoftReference<PlayerMeta>>();
 	private AuditPlugin plugin;
 	private File conf = null;
 	private Location spawn;
@@ -71,9 +72,9 @@ public class ApplyHelper extends IModule {
 
 	public void applied(Player player) {
 		PlayerMeta meta = getOrCreateMeta(player);
-		//Status oldStatus = meta.getStatus();
+		// Status oldStatus = meta.getStatus();
 		setNiceName(player.getPlayer());
-		//if (oldStatus == Status.UNAPPLIED)
+		// if (oldStatus == Status.UNAPPLIED)
 		meta.setApplyTime(System.currentTimeMillis());
 		meta.setStatus(Status.APPLIED);
 		save(player, meta);
@@ -105,13 +106,15 @@ public class ApplyHelper extends IModule {
 		return meta == null ? null : meta.getLocation(key);
 	}
 
-	public void setPlayerLocation(Player player, String key, Location location) {
+	public void setPlayerLocation(Player player, String key,
+			Location location) {
 		PlayerMeta meta = getOrCreateMeta(player);
 		meta.setLocation(key, location);
 		save(player, meta);
 	}
 
-	public void setPlayerLocation(String player, String key, Location location) {
+	public void setPlayerLocation(String player, String key,
+			Location location) {
 		PlayerMeta meta = getOrCreateMeta(player);
 		meta.setLocation(key, location);
 		save(player, meta);
@@ -173,7 +176,7 @@ public class ApplyHelper extends IModule {
 		SoftReference<PlayerMeta> meta = metas.get(name.toLowerCase());
 		PlayerMeta pm = null;
 		if (meta == null || (pm = meta.get()) == null) {
-			//Logs.info("Loading status: " + name);
+			// Logs.info("Loading status: " + name);
 			File metaFile = getFile(conf, name + ".yml");
 			if (metaFile == null || !metaFile.exists()) {
 				return pm;
@@ -207,8 +210,8 @@ public class ApplyHelper extends IModule {
 			getPlugin().getCommandHandler().register(new Apply());
 			getPlugin().getCommandHandler().register(new Fix());
 			getPlugin().getCommandHandler().register(new Give());
-			getPlugin().getCommandHandler().register(
-					new org.jim.bukkit.audit.apply.Status());
+			getPlugin().getCommandHandler()
+					.register(new org.jim.bukkit.audit.apply.Status());
 			getPlugin().getCommandHandler().register(new Rename());
 			getPlugin().getCommand("rename").setExecutor(new CommandExecutor() {
 
@@ -218,7 +221,8 @@ public class ApplyHelper extends IModule {
 					if (!(sender instanceof Player))
 						return true;
 					if (args.length == 0 || "help".equalsIgnoreCase(args[0])) {
-						sender.sendMessage("/rename [name] <lore[,]>   消耗一根羽毛，给一张纸改名");
+						sender.sendMessage(
+								"/rename [name] <lore[,]>   消耗一根羽毛，给一张纸改名");
 						return true;
 					}
 					Rename.rename((Player) sender, args[0],
@@ -238,16 +242,16 @@ public class ApplyHelper extends IModule {
 	@Override
 	public void reloadConfig() {
 
-		homeBlock = Material.getMaterial(getConfig().getInt(
-				"apply.command-block"));
+		homeBlock =
+				Material.getMaterial(getConfig().getInt("apply.command-block"));
 		Integer x = getPlugin().getConfig().getInt("spawn.x");
 		Integer y = getPlugin().getConfig().getInt("spawn.y");
 		Integer z = getPlugin().getConfig().getInt("spawn.z");
 		World world = getPlugin().getServer().getWorld(
 				getPlugin().getConfig().getString("spawn.world", "world"));
 		if (world == null) {
-			throw new IllegalArgumentException(getPlugin().getConfig()
-					.getString("spawn.world") + " 不存在");
+			throw new IllegalArgumentException(
+					getPlugin().getConfig().getString("spawn.world") + " 不存在");
 		}
 		spawn = new Location(world, x, y, z);
 		getPlugin().getLogger().info("备用出生坐标：" + spawn);
@@ -281,10 +285,8 @@ public class ApplyHelper extends IModule {
 	}
 
 	public static void setNiceName(final Player p) {
-		if (p == null
-				|| !p.isOnline()
-				|| !AuditPlugin.getPlugin().getConfig()
-						.getBoolean("nickname-prefix.enable", true))
+		if (p == null || !p.isOnline() || !AuditPlugin.getPlugin().getConfig()
+				.getBoolean("nickname-prefix.enable", true))
 			return;
 
 		AuditPlugin.getPlugin().submit(new Runnable() {
@@ -300,12 +302,8 @@ public class ApplyHelper extends IModule {
 						Util.setDisplayName(p, "nickname-prefix.unapplied");
 					}
 				} catch (Exception e) {
-					AuditPlugin
-							.getPlugin()
-							.getLogger()
-							.log(Level.WARNING,
-									"Set nickname for " + p.getName()
-											+ " error", e);
+					AuditPlugin.getPlugin().getLogger().log(Level.WARNING,
+							"Set nickname for " + p.getName() + " error", e);
 				}
 			}
 		});

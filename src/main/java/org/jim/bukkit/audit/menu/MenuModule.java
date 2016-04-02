@@ -2,7 +2,6 @@ package org.jim.bukkit.audit.menu;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,10 +17,10 @@ public class MenuModule extends IModule {
 		super(plugin);
 
 	}
-	
+
 	@Override
 	public void onDisable() {
-		for(MenuContext menu : menus.values())
+		for (MenuContext menu : menus.values())
 			menu.unload();
 		menus.clear();
 	}
@@ -38,8 +37,8 @@ public class MenuModule extends IModule {
 			File f = new File(System.getProperty("user.dir"));
 			root = new MenuFolder(f.getName());
 			iterate(root, f);
-			root.addItem(new MenuItem("Exit",new OnClickListener() {
-				
+			root.addItem(new MenuItem("Exit", new OnClickListener() {
+
 				@Override
 				public boolean onClick(MenuContext context) {
 					context.unload();
@@ -52,7 +51,8 @@ public class MenuModule extends IModule {
 
 	private void iterate(MenuFolder menu, File f) {
 		for (File file : f.listFiles()) {
-			if(file.getName().length()>13) continue;
+			if (file.getName().length() > 13)
+				continue;
 			if (file.isDirectory()) {
 				MenuFolder m = new MenuFolder(file.getName());
 				m.setOnClickListener(MenuItem.enter);
@@ -63,7 +63,7 @@ public class MenuModule extends IModule {
 				menu.addItem(m);
 			}
 		}
-		menu.addItem(new MenuItem("Back",MenuItem.back));
+		menu.addItem(new MenuItem("Back", MenuItem.back));
 	}
 
 	public Map<UUID, MenuContext> getMenus() {

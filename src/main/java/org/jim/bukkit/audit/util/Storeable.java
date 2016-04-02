@@ -12,7 +12,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public abstract class Storeable implements Serializable {
 
 	public void save(File file) throws IOException {
-		YamlConfiguration yaml = (YamlConfiguration) serial(new YamlConfiguration());
+		YamlConfiguration yaml =
+				(YamlConfiguration) serial(new YamlConfiguration());
 		if (yaml != null)
 			yaml.save(file);
 

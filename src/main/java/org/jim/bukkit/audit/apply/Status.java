@@ -19,25 +19,21 @@ public class Status extends ICmd {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		PlayerMeta meta = AuditPlugin.getPlugin().getHelper()
-				.getOrCreateMeta(args[0]);
+		PlayerMeta meta =
+				AuditPlugin.getPlugin().getHelper().getOrCreateMeta(args[0]);
 		sender.sendMessage("玩家: " + ChatColor.BLUE + args[0]);
-		sender.sendMessage("状态： " + ChatColor.ITALIC + meta.getStatus()+"("+meta.getStatus().getType()+")");
+		sender.sendMessage("状态： " + ChatColor.ITALIC + meta.getStatus() + "("
+				+ meta.getStatus().getType() + ")");
 		if (meta.getStatus() != org.jim.bukkit.audit.Status.UNAPPLIED) {
 			if (meta.getApplyTime() != 0) {
-				sender.sendMessage("考核时间: "
-						+ ChatColor.AQUA
-						+ new SimpleDateFormat().format(new Date(meta
-								.getApplyTime())));
+				sender.sendMessage(
+						"考核时间: " + ChatColor.AQUA + new SimpleDateFormat()
+								.format(new Date(meta.getApplyTime())));
 			}
-			sender.sendMessage("基地： "
-					+ ChatColor.AQUA
-					+ LocationUtil.toString(meta
-							.getLocation(ApplyHelper.LOCATION_BASE)));
-			sender.sendMessage("小镇的家： "
-					+ ChatColor.AQUA
-					+ LocationUtil.toString(meta
-							.getLocation(ApplyHelper.LOCATION_CMDTOWN)));
+			sender.sendMessage("基地： " + ChatColor.AQUA + LocationUtil
+					.toString(meta.getLocation(ApplyHelper.LOCATION_BASE)));
+			sender.sendMessage("小镇的家： " + ChatColor.AQUA + LocationUtil
+					.toString(meta.getLocation(ApplyHelper.LOCATION_CMDTOWN)));
 		}
 		return true;
 	}

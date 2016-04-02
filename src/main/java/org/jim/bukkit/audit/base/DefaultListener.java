@@ -3,7 +3,6 @@ package org.jim.bukkit.audit.base;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
-import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -11,10 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
-import org.jim.bukkit.audit.LocationRef;
 import org.jim.bukkit.audit.util.LocationUtil;
-
-import com.google.gson.Gson;
 
 public class DefaultListener implements Listener {
 
@@ -24,17 +20,17 @@ public class DefaultListener implements Listener {
 		if (lines != null) {
 			for (int i = 0; i < lines.length; i++)
 				if (lines[i] != null)
-					event.setLine(i, ChatColor.translateAlternateColorCodes(
-							'&', lines[i]));
+					event.setLine(i, ChatColor.translateAlternateColorCodes('&',
+							lines[i]));
 		}
 	}
 
 	/**
-	 * 禁止除主世界的实体传送 Cancel event when a non-player entity contacting with a
-	 * portal about to teleport
+	 * 禁止除主世界的实体传送 Cancel event when a non-player entity contacting with a portal about to teleport
+	 * 
 	 * @param event
 	 */
-	@EventHandler(ignoreCancelled=true)
+	@EventHandler(ignoreCancelled = true)
 	public void onEntityPortal(EntityPortalEvent event) {
 		if (event.getTo() != null) {
 			// 1 来处非主世界 2 去处为末地
@@ -50,10 +46,10 @@ public class DefaultListener implements Listener {
 				Command.broadcastCommandMessage(Bukkit.getConsoleSender(),
 						LocationUtil.toString(event.getFrom()) + " 试图传送实体 "
 								+ event.getEntity());
-				if(event.getEntity() instanceof LivingEntity){
-					LivingEntity e = (LivingEntity)event.getEntity();
+				if (event.getEntity() instanceof LivingEntity) {
+					LivingEntity e = (LivingEntity) event.getEntity();
 					e.damage(e.getHealth());
-				}else{
+				} else {
 					event.getEntity().remove();
 				}
 			}

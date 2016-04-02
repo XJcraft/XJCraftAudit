@@ -9,8 +9,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jim.bukkit.audit.util.Logs;
+
 /**
  * 检验装备的审核
+ * 
  * @author jimliang
  *
  */
@@ -20,7 +22,7 @@ public class MaterialAudit {
 
 	public void addMaterial(Material m) {
 		materials.add(m);
-		Logs.info("Add audit metarial: "+m+"("+m.getId()+")");
+		Logs.info("Add audit metarial: " + m + "(" + m.getId() + ")");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -28,7 +30,7 @@ public class MaterialAudit {
 		if (type != null && type > 0)
 			addMaterial(Material.getMaterial(type));
 	}
-	
+
 	public void clearMaterial() {
 		materials.clear();
 	}
@@ -50,9 +52,9 @@ public class MaterialAudit {
 		}
 		return unaccepts.toArray(new ItemStack[0]);
 	}
-	
+
 	public ItemStack[] accept(Player player) {
 		return accept(player.getInventory().getArmorContents());
 	}
-	 
+
 }

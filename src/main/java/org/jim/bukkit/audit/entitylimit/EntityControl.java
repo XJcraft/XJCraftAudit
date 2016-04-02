@@ -15,11 +15,12 @@ import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.IModule;
 import org.jim.bukkit.audit.util.Task;
 
-public class EntityControl extends IModule{
+public class EntityControl extends IModule {
 
 	private static EntityControl instance = null;
 	private Task task;
-	private Map<EntityType, Integer> entityLimit = new HashMap<EntityType, Integer>();
+	private Map<EntityType, Integer> entityLimit =
+			new HashMap<EntityType, Integer>();
 	private int radius = 100;
 
 	public EntityControl(AuditPlugin plugin) {
@@ -55,9 +56,9 @@ public class EntityControl extends IModule{
 				if (count > 0) {
 					map.put(entity.getType(), count - 1);
 				} else {
-					if(entity instanceof LivingEntity){
+					if (entity instanceof LivingEntity) {
 						LivingEntity l = (LivingEntity) entity;
-						if(l.getCustomName()!=null){
+						if (l.getCustomName() != null) {
 							continue;
 						}
 					}
@@ -74,21 +75,20 @@ public class EntityControl extends IModule{
 	}
 
 	@Override
-	public void onEnable() {
-	}
+	public void onEnable() {}
 
 	@Override
 	public void onDisable() {
 		destory();
 	}
-	
+
 	@Override
 	public void reloadConfig() {
-		final FileConfiguration conf =  getPlugin().getConfig();
-		List<String> list =conf.getStringList("entityControl.limit");
-		//Map<EntityType, Integer> entityLimit = null;
+		final FileConfiguration conf = getPlugin().getConfig();
+		List<String> list = conf.getStringList("entityControl.limit");
+		// Map<EntityType, Integer> entityLimit = null;
 		if (list != null && !list.isEmpty()) {
-			//entityLimit = new HashMap<EntityType, Integer>();
+			// entityLimit = new HashMap<EntityType, Integer>();
 			for (String line : list) {
 				String[] array = line.split("=", 2);
 				if (array.length >= 2) {
@@ -101,7 +101,7 @@ public class EntityControl extends IModule{
 				}
 			}
 		}
-		//instance = new EntityControl(entityLimit);
+		// instance = new EntityControl(entityLimit);
 		getPlugin().getLogger().info("limit: " + entityLimit);
 		radius = conf.getInt("entityControl.radius");
 		if (conf.getBoolean("entityControl.autoClear", false)) {
@@ -122,6 +122,6 @@ public class EntityControl extends IModule{
 			};
 			task.start(20l, 20 * conf.getInt("entityControl.interval"));
 		}
-		
+
 	}
 }

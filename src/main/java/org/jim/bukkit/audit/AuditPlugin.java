@@ -15,15 +15,11 @@ import org.jim.bukkit.audit.base.AutoSeedListener;
 import org.jim.bukkit.audit.base.DefaultListener;
 import org.jim.bukkit.audit.cmds.CommandHandler;
 import org.jim.bukkit.audit.entitylimit.EntityControl;
-import org.jim.bukkit.audit.menu.MenuCmd;
-import org.jim.bukkit.audit.menu.MenuModule;
-import org.jim.bukkit.audit.rcd.Rcd;
 import org.jim.bukkit.audit.rcd.RedstoneClockDetector;
 import org.jim.bukkit.audit.script.RunScript;
 import org.jim.bukkit.audit.skin.SkinModule;
 import org.jim.bukkit.audit.unbreaksign.UnbreakingSign;
 import org.jim.bukkit.audit.util.JavaPluginFix;
-import org.jim.bukkit.audit.util.Logs;
 
 /**
  * 本来是定位成XJCraft的考核插件，结果还加了一些乱七八糟的模块
@@ -37,9 +33,10 @@ public class AuditPlugin extends JavaPluginFix {
 	public ApplyHelper helper = null;
 
 	private static AuditPlugin instance;
-	private List<IModule> modules = new ArrayList<IModule>(){
+	private List<IModule> modules = new ArrayList<IModule>() {
 		public boolean add(IModule e) {
-			AuditPlugin.instance.getLogger().info("Add Module :"+e.getClass());
+			AuditPlugin.instance.getLogger()
+					.info("Add Module :" + e.getClass());
 			return super.add(e);
 		};
 	};
@@ -65,7 +62,7 @@ public class AuditPlugin extends JavaPluginFix {
 
 	@Override
 	public void onDisable() {
-		for(IModule m : modules)
+		for (IModule m : modules)
 			m.onDisable();
 		super.onDisable();
 	}
@@ -76,14 +73,14 @@ public class AuditPlugin extends JavaPluginFix {
 		commandHandler = new CommandHandler(this);
 		getCommand("xjcraft").setExecutor(commandHandler);
 		getCommand("xj").setExecutor(commandHandler);
-		for(IModule m : modules){
+		for (IModule m : modules) {
 			m.onEnable();
 		}
 		registerEvents(new DefaultListener());
 		registerEvents(new AutoSeedListener());
 	}
-	
-	public void registerEvents(Listener listener){
+
+	public void registerEvents(Listener listener) {
 		getServer().getPluginManager().registerEvents(listener, this);
 	}
 
@@ -92,8 +89,9 @@ public class AuditPlugin extends JavaPluginFix {
 		super.reloadConfig();
 		getLogger().info("Reloading " + getName());
 		materialAudit.clearMaterial();
-		materialAudit.addMaterials(getConfig().getIntegerList("accept-armorContent"));
-		for(IModule m : modules)
+		materialAudit.addMaterials(
+				getConfig().getIntegerList("accept-armorContent"));
+		for (IModule m : modules)
 			m.reloadConfig();
 	}
 
@@ -125,6 +123,7 @@ public class AuditPlugin extends JavaPluginFix {
 	public CommandHandler getCommandHandler() {
 		return commandHandler;
 	}
+
 	public String getMessage(String path) {
 		return this.getConfig().getString(path);
 	}

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -41,8 +40,7 @@ public class Lang {
 			return block;
 		Location location = block.getLocation().clone();
 		/*
-		 * for(int i=1;i<10;i++){ // up down if(isAir(location.add(0, i, 0)))
-		 * return }
+		 * for(int i=1;i<10;i++){ // up down if(isAir(location.add(0, i, 0))) return }
 		 */
 		if (isAir(location.add(0, 1, 0)))
 			return location.getBlock();
@@ -52,11 +50,13 @@ public class Lang {
 	public static boolean isAir(Block block) {
 		return block.getType() == Material.AIR;
 	}
-	public static boolean isBlockType(Block block,Material m){
-		return block !=null && block.getType() == m;
+
+	public static boolean isBlockType(Block block, Material m) {
+		return block != null && block.getType() == m;
 	}
-	public static boolean isMaterialType(ItemStack item,Material m){
-		return item !=null && item.getType() == m;
+
+	public static boolean isMaterialType(ItemStack item, Material m) {
+		return item != null && item.getType() == m;
 	}
 
 	public static boolean isAir(Location location) {
@@ -77,8 +77,8 @@ public class Lang {
 	public static Block getSignDep(Block sign) {
 		if (sign.getType() != Material.WALL_SIGN)
 			return null;
-		org.bukkit.material.Sign data = (org.bukkit.material.Sign) sign
-				.getState().getData();
+		org.bukkit.material.Sign data =
+				(org.bukkit.material.Sign) sign.getState().getData();
 		BlockFace signFace = data.getFacing();
 		return sign.getRelative(signFace.getOppositeFace());
 	}
@@ -118,35 +118,36 @@ public class Lang {
 			block.setMetadata(key,
 					new FixedMetadataValue(AuditPlugin.getPlugin(), value));
 	}
-	
-	public static Integer parseInt(String s,Integer def){
+
+	public static Integer parseInt(String s, Integer def) {
 		try {
 			return Integer.parseInt(s);
 		} catch (NumberFormatException e) {
 			return def;
 		}
 	}
-	public static Double parseDouble(String s){
+
+	public static Double parseDouble(String s) {
 		try {
 			return Double.parseDouble(s);
 		} catch (NumberFormatException e) {
 			return 0d;
 		}
 	}
-	
-    public static Object first(Object obj) {
-        if (null == obj)
-            return obj;
 
-        if (obj instanceof Collection<?>) {
-            Iterator<?> it = ((Collection<?>) obj).iterator();
-            return it.hasNext() ? it.next() : null;
-        }
+	public static Object first(Object obj) {
+		if (null == obj)
+			return obj;
 
-        if (obj.getClass().isArray())
-            return Array.getLength(obj) > 0 ? Array.get(obj, 0) : null;
+		if (obj instanceof Collection<?>) {
+			Iterator<?> it = ((Collection<?>) obj).iterator();
+			return it.hasNext() ? it.next() : null;
+		}
 
-        return obj;
-    }
+		if (obj.getClass().isArray())
+			return Array.getLength(obj) > 0 ? Array.get(obj, 0) : null;
+
+		return obj;
+	}
 
 }

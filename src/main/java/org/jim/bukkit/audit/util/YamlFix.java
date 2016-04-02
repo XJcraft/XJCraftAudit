@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
 import java.util.logging.Level;
 
 import org.apache.commons.lang.Validate;
@@ -21,7 +19,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
-//修复bukkit使用系统字符编码读取yaml配置
+// 修复bukkit使用系统字符编码读取yaml配置
 public class YamlFix extends YamlConfiguration {
 
 	private String charset = "UTF-8";
@@ -35,8 +33,8 @@ public class YamlFix extends YamlConfiguration {
 	}
 
 	@Override
-	public void load(InputStream stream) throws IOException,
-			InvalidConfigurationException {
+	public void load(InputStream stream)
+			throws IOException, InvalidConfigurationException {
 		InputStreamReader reader = new InputStreamReader(stream, charset);
 		StringBuilder builder = new StringBuilder();
 		BufferedReader input = new BufferedReader(reader);
@@ -56,8 +54,8 @@ public class YamlFix extends YamlConfiguration {
 	}
 
 	/*
-	 * @Override public Object get(String path, Object def) { Object obj =
-	 * super.get(path,null); if(obj == null ){ set(path, def); } return def; }
+	 * @Override public Object get(String path, Object def) { Object obj = super.get(path,null);
+	 * if(obj == null ){ set(path, def); } return def; }
 	 */
 
 	public static YamlConfiguration loadConfigurationFix(InputStream stream) {
@@ -103,8 +101,8 @@ public class YamlFix extends YamlConfiguration {
 
 		String data = saveToString();
 
-		OutputStreamWriter writer = new OutputStreamWriter(
-				new FileOutputStream(file), charset);
+		OutputStreamWriter writer =
+				new OutputStreamWriter(new FileOutputStream(file), charset);
 
 		try {
 			writer.write(data);

@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.jim.bukkit.audit.AuditPlugin;
 
-public abstract class ICmd  {
-	
+public abstract class ICmd {
+
 	private CommandHandler handler;
 
 	private String cmdName;
@@ -14,11 +14,11 @@ public abstract class ICmd  {
 	protected Integer minParam = 0;
 	protected Integer maxParam = Integer.MAX_VALUE;
 	protected boolean show = true;
-	
-	public ICmd(String cmdName){
+
+	public ICmd(String cmdName) {
 		this.cmdName = cmdName;
 	}
-	
+
 
 	public ICmd(String cmdName, String extra, String usage) {
 		this.cmdName = cmdName;
@@ -32,10 +32,11 @@ public abstract class ICmd  {
 	public abstract String permission();
 
 	public String toHelp(String mainCmd) {
-		return ChatColor.AQUA+mainCmd + " §r" + cmdName + " " + extra + " -- " + usage;
+		return ChatColor.AQUA + mainCmd + " §r" + cmdName + " " + extra + " -- "
+				+ usage;
 	}
-	
-	public String toHelp(){
+
+	public String toHelp() {
 		return toHelp("/xjcraft");
 	}
 
@@ -61,12 +62,13 @@ public abstract class ICmd  {
 	public String getCmdName() {
 		return cmdName;
 	}
-	public boolean legalParam(String[] param){
+
+	public boolean legalParam(String[] param) {
 		int len = param.length;
-		return len>=minParam && len<=maxParam;
+		return len >= minParam && len <= maxParam;
 	}
 
-	public AuditPlugin getPlugin(){
+	public AuditPlugin getPlugin() {
 		return AuditPlugin.getPlugin();
 	}
 

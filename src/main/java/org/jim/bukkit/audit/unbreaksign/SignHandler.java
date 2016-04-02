@@ -7,7 +7,8 @@ import org.bukkit.block.Sign;
 
 public class SignHandler {
 
-	private static final BlockFace[] FACES = { BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST };
+	private static final BlockFace[] FACES = { BlockFace.NORTH, BlockFace.SOUTH,
+			BlockFace.EAST, BlockFace.WEST };
 	private boolean isProtected = false;
 
 	SignHandler(Block block) {
@@ -31,7 +32,8 @@ public class SignHandler {
 			Block near = block.getRelative(face);
 			if (Material.WALL_SIGN == near.getType()) {
 				Sign s = (Sign) near.getState();
-				if (matchPattern(s) && ((org.bukkit.material.Sign) s.getData()).getFacing() == face) {
+				if (matchPattern(s) && ((org.bukkit.material.Sign) s.getData())
+						.getFacing() == face) {
 					isProtected = true;
 					return;
 				}
@@ -52,6 +54,7 @@ public class SignHandler {
 	}
 
 	public static boolean isSign(Block block) {
-		return block != null && (Material.WALL_SIGN == block.getType() || Material.SIGN_POST == block.getType());
+		return block != null && (Material.WALL_SIGN == block.getType()
+				|| Material.SIGN_POST == block.getType());
 	}
 }

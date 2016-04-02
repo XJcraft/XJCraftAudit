@@ -3,16 +3,13 @@ package org.jim.bukkit.audit.unbreaksign;
 import java.util.Iterator;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -20,11 +17,12 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 public class SignUnbreakingListener implements Listener {
 
 	private static final String MESSAGE = ChatColor.AQUA + "这个木牌好耐操啊~~";
-	private static final BlockFace[] FACES2 = { BlockFace.NORTH,
-			BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST, BlockFace.UP,
-			BlockFace.DOWN };
+	private static final BlockFace[] FACES2 =
+			{ BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST,
+					BlockFace.UP, BlockFace.DOWN };
 
-	protected SignUnbreakingListener(){}
+	protected SignUnbreakingListener() {}
+
 	@EventHandler
 	public void onSignChange(SignChangeEvent event) {
 		if (matchPattern(event.getLine(0))) {

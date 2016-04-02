@@ -2,7 +2,6 @@ package org.jim.bukkit.audit.apply;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -50,11 +49,13 @@ public class Rename extends ICmd {
 		ItemMeta meta = paper.getItemMeta();
 		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
 		if (lore != null) {
-			meta.setLore(Arrays.asList(ChatColor.translateAlternateColorCodes('&', lore).split(",")));
+			meta.setLore(Arrays.asList(ChatColor
+					.translateAlternateColorCodes('&', lore).split(",")));
 		}
 		newPaper.setItemMeta(meta);
 		PlayerInventory inventory = player.getInventory();
-		HashMap<Integer, ItemStack> map = player.getInventory().removeItem(feather, paper);
+		HashMap<Integer, ItemStack> map =
+				player.getInventory().removeItem(feather, paper);
 		if (!map.isEmpty()) {
 			if (!map.containsValue(feather))
 				inventory.addItem(feather);

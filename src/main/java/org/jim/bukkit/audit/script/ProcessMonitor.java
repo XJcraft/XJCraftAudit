@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Logger;
 
-import org.jim.bukkit.audit.AuditPlugin;
 public class ProcessMonitor implements Runnable {
 
-	//private static final Logger log = AuditPlugin.getPlugin().getLogger();
+	// private static final Logger log = AuditPlugin.getPlugin().getLogger();
 	private ProcessWrapper process;
 
 	ProcessMonitor(ProcessWrapper p) {
@@ -21,10 +19,12 @@ public class ProcessMonitor implements Runnable {
 		InputStreamReader reader = null;
 		InputStreamReader errorReader = null;
 		try {
-			reader = new InputStreamReader(process.getRawProcess()
-					.getInputStream(), System.getProperty("sun.jnu.encoding"));
-			errorReader = new InputStreamReader(process.getRawProcess()
-					.getErrorStream(), System.getProperty("sun.jnu.encoding"));
+			reader = new InputStreamReader(
+					process.getRawProcess().getInputStream(),
+					System.getProperty("sun.jnu.encoding"));
+			errorReader = new InputStreamReader(
+					process.getRawProcess().getErrorStream(),
+					System.getProperty("sun.jnu.encoding"));
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
@@ -33,17 +33,18 @@ public class ProcessMonitor implements Runnable {
 		String line = null;
 		try {
 			while ((line = buf.readLine()) != null && process.isRunning()) {
-				//log.info("XJ Client> " + line);
+				// log.info("XJ Client> " + line);
 				process.log(line);
 			}
-			while ((line = bufError.readLine()) != null && process.isRunning()) {
+			while ((line = bufError.readLine()) != null
+					&& process.isRunning()) {
 				process.log(line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			process.log("Error: "+e.getMessage());
-		} finally{
-			//Streams.safeClose(buf);
+			process.log("Error: " + e.getMessage());
+		} finally {
+			// Streams.safeClose(buf);
 			try {
 				buf.close();
 				bufError.close();

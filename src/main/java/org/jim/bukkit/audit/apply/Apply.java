@@ -2,14 +2,13 @@ package org.jim.bukkit.audit.apply;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.XJException;
 import org.jim.bukkit.audit.cmds.ICmd;
 
 public class Apply extends ICmd {
 
 	public Apply() {
-		super("apply","","申请考核");
+		super("apply", "", "申请考核");
 	}
 
 	@Override

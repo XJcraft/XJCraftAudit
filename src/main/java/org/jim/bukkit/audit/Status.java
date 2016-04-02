@@ -1,6 +1,6 @@
 package org.jim.bukkit.audit;
 
-public enum Status{
+public enum Status {
 
 	UNAPPLIED(1), // 未通过审核
 	APPLIED(2), // 通过但未使用命令命令方块
@@ -12,10 +12,12 @@ public enum Status{
 	}
 
 	private static Status[] types = new Status[5];
+
 	static {
 		for (Status s : Status.values())
 			types[s.getType()] = s;
 	}
+
 	private int type;
 
 	public int getType() {
@@ -23,7 +25,7 @@ public enum Status{
 	}
 
 	public static Status get(int type) {
-		if (type >0 && type < types.length)
+		if (type > 0 && type < types.length)
 			return types[type];
 		return null;
 	}

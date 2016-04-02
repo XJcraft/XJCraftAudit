@@ -28,42 +28,42 @@ public class Rcd extends ICmd {
 		final int pageNum = getInt(args, 0, 1);
 		final int second = getInt(args, 1, 10);
 		QueryRecord query = new QueryRecord(pageNum, second);
-		if(pageNum == 1){
+		if (pageNum == 1) {
 			showAsync(sender, query);
 			return true;
 		}
 		SoftReference<QueryRecord> ref = cache.get(sender.getName());
 		QueryRecord oldQuery = null;
-		if(ref!=null){
+		if (ref != null) {
 			oldQuery = ref.get();
 		}
-		if(oldQuery== null || oldQuery.isDeprecated()){
+		if (oldQuery == null || oldQuery.isDeprecated()) {
 			showAsync(sender, query);
-		}else{
+		} else {
 			oldQuery.pageNum = query.pageNum;
 			show(sender, oldQuery);
 		}
 		return true;
 	}
-	public void showAsync(final CommandSender sender,final QueryRecord query){
+
+	public void showAsync(final CommandSender sender, final QueryRecord query) {
 		final RedstoneClockDetector rcd = RedstoneClockDetector.me();
 		rcd.setEnable(true);
 		sender.sendMessage("正在检测红石信号...需用时： " + ChatColor.YELLOW + query.second
 				+ ChatColor.WHITE + "秒");
-		sender.getServer().getScheduler()
-		.runTaskLater(AuditPlugin.getPlugin(), new Runnable(){
+		sender.getServer().getScheduler().runTaskLater(AuditPlugin.getPlugin(),
+				new Runnable() {
 
-			@Override
-			public void run() {
-				rcd.setEnable(false);
-				query.record = new TreeSet<>(
-						rcd.getRecords().values());
-				rcd.clearRecords();
-				query.time = System.currentTimeMillis();
-				show(sender, query);
-			}
-			
-		},query.second*20l);
+					@Override
+					public void run() {
+						rcd.setEnable(false);
+						query.record = new TreeSet<>(rcd.getRecords().values());
+						rcd.clearRecords();
+						query.time = System.currentTimeMillis();
+						show(sender, query);
+					}
+
+				}, query.second * 20l);
 	}
 
 	public void show(CommandSender sender, QueryRecord query) {
@@ -72,21 +72,22 @@ public class Rcd extends ICmd {
 		int end = query.pageNum * pageSize;
 		int current = 0;
 		long ticks = query.second * 20l;
-		sender.sendMessage(String
-				.format("-------Restone clock detector(Statistics used: %ds,Record: %d,Page:%d/%d)------",
-						query.second, query.record.size(),query.pageNum,query.pageSum()));
-		Iterator<RedstoneClockDetector.RestoneRecord> it = query.record
-				.iterator();
+		sender.sendMessage(String.format(
+				"-------Restone clock detector(Statistics used: %ds,Record: %d,Page:%d/%d)------",
+				query.second, query.record.size(), query.pageNum,
+				query.pageSum()));
+		Iterator<RedstoneClockDetector.RestoneRecord> it =
+				query.record.iterator();
 		while (current < end && it.hasNext()) {
 			current++;
 			RedstoneClockDetector.RestoneRecord record = it.next();
 			if (start < current) {
 				Location l = record.getLocation();
 				int count = record.getCount();
-				sender.sendMessage(String
-						.format("%s,\u00A76%s\u00A7f Count: \u00A7e%s\u00A7f Rate: \u00A7e%s\u00A7f pt",
-								current, LocationUtil.toString(l), count,
-								count * 1.0 / ticks));
+				sender.sendMessage(String.format(
+						"%s,\u00A76%s\u00A7f Count: \u00A7e%s\u00A7f Rate: \u00A7e%s\u00A7f pt",
+						current, LocationUtil.toString(l), count,
+						count * 1.0 / ticks));
 			}
 		}
 	}
@@ -114,19 +115,22 @@ public class Rcd extends ICmd {
 		// int ticks;
 		Set<RedstoneClockDetector.RestoneRecord> record;
 		Long time = 0l;
+
 		public QueryRecord(int pageNum, int second) {
 			super();
 			this.pageNum = pageNum;
 			this.second = second;
-			
+
 		}
-		public boolean isDeprecated(){
-			return System.currentTimeMillis()-time> 20*1000;//30s cache
+
+		public boolean isDeprecated() {
+			return System.currentTimeMillis() - time > 20 * 1000;// 30s cache
 		}
-		public int pageSum(){
+
+		public int pageSum() {
 			int size = record.size();
-			int pagesum = size/pageSize;
-			if(size%pageSize!=0){
+			int pagesum = size / pageSize;
+			if (size % pageSize != 0) {
 				pagesum++;
 			}
 			return pagesum;

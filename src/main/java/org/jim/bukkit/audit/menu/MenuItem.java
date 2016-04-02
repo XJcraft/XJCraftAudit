@@ -2,18 +2,18 @@ package org.jim.bukkit.audit.menu;
 
 
 public class MenuItem {
-	
+
 	public static final OnClickListener back = new OnClickListener() {
-		
+
 		@Override
 		public boolean onClick(MenuContext context) {
 			context.back();
 			return true;
 		}
 	};
-	
+
 	public static final OnClickListener enter = new OnClickListener() {
-		
+
 		@Override
 		public boolean onClick(MenuContext context) {
 			context.click();
@@ -21,20 +21,20 @@ public class MenuItem {
 		}
 	};
 
-	 boolean enabled = true;
-	 
-	 String label;
-	 
-	 MenuFolder parent;
-	 
-	 OnClickListener onClickListener;
+	boolean enabled = true;
+
+	String label;
+
+	MenuFolder parent;
+
+	OnClickListener onClickListener;
 
 	public MenuItem(String label) {
 		super();
 		this.label = label;
 	}
-	
-	
+
+
 
 	public MenuItem(String label, OnClickListener onClickListener) {
 		super();
@@ -79,12 +79,13 @@ public class MenuItem {
 			return false;
 		return true;
 	}
-	public boolean isFolder(){
+
+	public boolean isFolder() {
 		return this instanceof MenuFolder;
 	}
 
 	public void setOnClickListener(OnClickListener onClickListener) {
 		this.onClickListener = onClickListener;
 	}
-	 
+
 }

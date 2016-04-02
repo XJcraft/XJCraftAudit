@@ -12,7 +12,7 @@ public class UnbreakingSign extends IModule {
 	@Override
 	public void onEnable() {
 		getPlugin().registerEvents(new SignUnbreakingListener());
-		
+
 	}
 
 	@Override

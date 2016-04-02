@@ -8,7 +8,7 @@ import org.jim.bukkit.audit.AuditPlugin;
 public abstract class Task implements Runnable {
 	private final JavaPlugin plugin;
 	private int id = -1;
-	
+
 	public Task() {
 		this(AuditPlugin.getPlugin());
 	}
@@ -22,9 +22,8 @@ public abstract class Task implements Runnable {
 	}
 
 	public boolean isRunning() {
-		return (this.id != -1)
-				&& (Bukkit.getServer().getScheduler()
-						.isCurrentlyRunning(this.id));
+		return (this.id != -1) && (Bukkit.getServer().getScheduler()
+				.isCurrentlyRunning(this.id));
 	}
 
 	public boolean isQueued() {
@@ -51,7 +50,7 @@ public abstract class Task implements Runnable {
 				.scheduleSyncDelayedTask(this.plugin, this);
 		return this;
 	}
-	
+
 	public Task startAsync() {
 		BukkitTask task = this.plugin.getServer().getScheduler()
 				.runTaskAsynchronously(getPlugin(), this);

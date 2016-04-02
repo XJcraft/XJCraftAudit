@@ -19,7 +19,7 @@ public class LocationUtil {
 		yaml.set(prefix + ".pitch", loc.getPitch());
 		yaml.set(prefix + ".yaw", loc.getYaw());
 	}
-	
+
 	public static void putLocation(MemorySection yaml, LocationRef loc,
 			String prefix) {
 		if (loc == null)
@@ -44,28 +44,29 @@ public class LocationUtil {
 		return new Location(world, x, y, z, yaw.floatValue(),
 				pitch.floatValue());
 	}
-	
-	public static LocationRef getLocationRef(MemorySection yaml, String prefix) {
+
+	public static LocationRef getLocationRef(MemorySection yaml,
+			String prefix) {
 		String worldName = (String) yaml.get(prefix + ".world");
-		//if (worldName == null) {
-		//	return null;
-		//}
-		//World world = Bukkit.getWorld(worldName);
+		// if (worldName == null) {
+		// return null;
+		// }
+		// World world = Bukkit.getWorld(worldName);
 		double x = yaml.getDouble(prefix + ".x");
 		double y = yaml.getDouble(prefix + ".y");
 		double z = yaml.getDouble(prefix + ".z");
 		return new LocationRef(worldName, x, y, z);
 	}
 
-	public static String toString(Location location){
-		if(location == null){
+	public static String toString(Location location) {
+		if (location == null) {
 			return "[null Location]";
 		}
 		return toString(new LocationRef(location));
 	}
-	
-	public static String toString(LocationRef location){
-		if(location == null){
+
+	public static String toString(LocationRef location) {
+		if (location == null) {
 			return "[null Location]";
 		}
 		return location.toString();

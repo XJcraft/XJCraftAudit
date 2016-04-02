@@ -36,15 +36,14 @@ public class EntityCheck {
 		m.append("------ Entity Info ------\n");
 		m.append("Player: " + ChatColor.BLUE + onLinePlayer.getName()
 				+ ChatColor.WHITE + "\n");
-		m.append(String.format("Location: %s, %d, %d, %d\n", location
-				.getWorld().getName(), location.getBlockX(), location
-				.getBlockY(), location.getBlockZ()));
+		m.append(String.format("Location: %s, %d, %d, %d\n",
+				location.getWorld().getName(), location.getBlockX(),
+				location.getBlockY(), location.getBlockZ()));
 		m.append("Radius: " + radius + "\n");
 		for (EntityCount c : set) {
-			m.append("Entity: " + ChatColor.BLUE + "#"
-					+ c.getType().getTypeId() + "(" + c.getType() + ")"
-					+ ChatColor.WHITE + " Count: " + ChatColor.RED
-					+ c.getCount() + ChatColor.WHITE + "\n");
+			m.append("Entity: " + ChatColor.BLUE + "#" + c.getType().getTypeId()
+					+ "(" + c.getType() + ")" + ChatColor.WHITE + " Count: "
+					+ ChatColor.RED + c.getCount() + ChatColor.WHITE + "\n");
 		}
 		m.append("------    Total Entity: " + ChatColor.UNDERLINE + total
 				+ ChatColor.WHITE + "    ------\n");
@@ -69,16 +68,17 @@ public class EntityCheck {
 		StringBuffer m = new StringBuffer();
 		m.append("------ Entity Info (Radius:" + radius + ") ------\n");
 		// Map<Player,PlayerEntity> map = new HashMap<>();
-		Set<PlayerEntity> entitys = new TreeSet<>(new Comparator<PlayerEntity>() {
+		Set<PlayerEntity> entitys =
+				new TreeSet<>(new Comparator<PlayerEntity>() {
 
-			@Override
-			public int compare(PlayerEntity o1, PlayerEntity o2) {
-				return o2.count-o1.count;
-			}
-		});
+					@Override
+					public int compare(PlayerEntity o1, PlayerEntity o2) {
+						return o2.count - o1.count;
+					}
+				});
 		for (Player player : Bukkit.getOnlinePlayers()) {
-			entitys.add(new PlayerEntity(player, player.getNearbyEntities(
-					radius, 255d, radius).size()));
+			entitys.add(new PlayerEntity(player,
+					player.getNearbyEntities(radius, 255d, radius).size()));
 		}
 		for (PlayerEntity pe : entitys) {
 			m.append("Player: " + ChatColor.BLUE + pe.player.getName()
