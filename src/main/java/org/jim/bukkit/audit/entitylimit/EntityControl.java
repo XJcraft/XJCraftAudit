@@ -130,9 +130,13 @@ public class EntityControl extends IModule{
 			try {
 				int id = Integer.parseInt(nameOrId);
 				type = EntityType.fromId(id);
+				
 				log.warning(String.format("[EntityLimit] You should not use ID: %d", id)); // 警告不应该使用 id, 而是应该使用名称
+				
 				if (type == null) {
 					log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity id", nameOrId)); // 警告加载这一项失败, 实体 id 不存在
+				} else {
+					log.warning(String.format("[EntityLimit] Please use the entity name: %s", type.getName())); // 警告不应该使用 id, 而是应该使用名称
 				}
 			} catch (NumberFormatException e) {
 				log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity name", nameOrId)); // 警告加载这一项失败, 未知的实体名
