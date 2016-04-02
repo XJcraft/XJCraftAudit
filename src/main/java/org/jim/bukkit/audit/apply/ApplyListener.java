@@ -45,7 +45,7 @@ public class ApplyListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        helper.setNiceName(player);
+        ApplyHelper.setNiceName(player);
         if (event.isBedSpawn()) return;
         // 通过考核并且没有床出生
         if (helper.isApply(player) && !event.isBedSpawn()
@@ -129,7 +129,7 @@ public class ApplyListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        helper.setNiceName(event.getPlayer());
+        ApplyHelper.setNiceName(event.getPlayer());
     }
 
 
