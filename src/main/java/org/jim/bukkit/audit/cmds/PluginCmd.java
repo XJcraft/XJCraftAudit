@@ -134,8 +134,8 @@ public class PluginCmd extends ICmd {
 
 	private boolean reloadPlugin(String pluginName, CommandSender sender)
 			throws Exception {
-		boolean unload = unloadPlugin(pluginName, sender);
-		boolean load = loadPlugin(pluginName, sender);
+		unloadPlugin(pluginName, sender);
+		loadPlugin(pluginName, sender);
 		return true;
 	}
 }

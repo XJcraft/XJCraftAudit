@@ -113,8 +113,8 @@ public class SkinModule extends IModule implements Listener {
         }
     }
 
-    private static String decodeProperty(String value) {
-        return new String(Base64.decodeBase64(value), Charsets.UTF_8);
-    }
+//    private static String decodeProperty(String value) {
+//        return new String(Base64.decodeBase64(value), Charsets.UTF_8);
+//    }
 
 }
