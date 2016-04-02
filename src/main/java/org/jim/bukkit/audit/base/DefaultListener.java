@@ -3,7 +3,6 @@ package org.jim.bukkit.audit.base;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
-import org.bukkit.WorldType;
 import org.bukkit.command.Command;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -11,10 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
-import org.jim.bukkit.audit.LocationRef;
 import org.jim.bukkit.audit.util.LocationUtil;
-
-import com.google.gson.Gson;
 
 public class DefaultListener implements Listener {
 

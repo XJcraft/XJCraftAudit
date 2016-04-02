@@ -5,9 +5,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.bukkit.command.CommandSender;
-import org.jim.bukkit.audit.AuditPlugin;
-
 public class FileExecutor {
 	
 	public Writer logger;

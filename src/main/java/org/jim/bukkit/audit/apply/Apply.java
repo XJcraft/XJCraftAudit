@@ -2,7 +2,6 @@ package org.jim.bukkit.audit.apply;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.XJException;
 import org.jim.bukkit.audit.cmds.ICmd;
 

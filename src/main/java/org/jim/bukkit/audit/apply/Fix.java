@@ -3,13 +3,9 @@ package org.jim.bukkit.audit.apply;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.rmi.CORBA.Util;
-
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
@@ -20,7 +16,6 @@ import org.jim.bukkit.audit.cmds.ICmd;
 import org.jim.bukkit.audit.util.Assert;
 import org.jim.bukkit.audit.util.Lang;
 import org.jim.bukkit.audit.util.LocationUtil;
-import org.jim.bukkit.audit.util.Logs;
 
 public class Fix extends ICmd {
 

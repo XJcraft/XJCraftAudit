@@ -1,5 +1,12 @@
 package org.jim.bukkit.audit.apply;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,13 +21,6 @@ import org.jim.bukkit.audit.PlayerMeta;
 import org.jim.bukkit.audit.Status;
 import org.jim.bukkit.audit.util.Logs;
 import org.jim.bukkit.audit.util.Util;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
 
 
 public class ApplyHelper extends IModule {

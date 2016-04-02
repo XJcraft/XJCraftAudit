@@ -1,10 +1,9 @@
 package org.jim.bukkit.audit.skin;
 
-import com.google.gson.Gson;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.properties.Property;
-import com.mojang.authlib.yggdrasil.response.MinecraftTexturesPayload;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.entity.Player;
@@ -18,9 +17,11 @@ import org.jim.bukkit.audit.util.Lang;
 import org.jim.bukkit.audit.util.Logs;
 import org.jim.bukkit.audit.util.ReflectUtil;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.Gson;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.yggdrasil.response.MinecraftTexturesPayload;
 
 public class SkinModule extends IModule implements Listener {
 

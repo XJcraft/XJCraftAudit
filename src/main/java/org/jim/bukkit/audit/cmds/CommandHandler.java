@@ -14,7 +14,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jim.bukkit.audit.AuditPlugin;
-import org.jim.bukkit.audit.rcd.Rcd;
 
 public class CommandHandler implements TabExecutor {
 	private static CommandHandler instance;

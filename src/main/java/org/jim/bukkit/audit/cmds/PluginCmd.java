@@ -2,23 +2,18 @@ package org.jim.bukkit.audit.cmds;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.SimplePluginManager;
-import org.jim.bukkit.audit.AuditPlugin;
-import org.jim.bukkit.audit.util.Lang;
 
 public class PluginCmd extends ICmd {
 

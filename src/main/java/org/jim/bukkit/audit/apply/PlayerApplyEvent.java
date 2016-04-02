@@ -1,13 +1,13 @@
 package org.jim.bukkit.audit.apply;
 
+import java.util.Arrays;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.util.Logs;
-
-import java.util.Arrays;
 
 public class PlayerApplyEvent extends Event {
 	

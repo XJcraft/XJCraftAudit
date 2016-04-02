@@ -2,7 +2,6 @@ package org.jim.bukkit.audit.apply;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

@@ -3,12 +3,6 @@ package org.jim.bukkit.audit.util;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 public class LocationRef implements ConfigurationSerializable {

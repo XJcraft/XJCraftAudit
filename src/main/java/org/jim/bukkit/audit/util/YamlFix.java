@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
 import java.util.logging.Level;
 
 import org.apache.commons.lang.Validate;

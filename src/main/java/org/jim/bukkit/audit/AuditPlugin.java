@@ -15,15 +15,11 @@ import org.jim.bukkit.audit.base.AutoSeedListener;
 import org.jim.bukkit.audit.base.DefaultListener;
 import org.jim.bukkit.audit.cmds.CommandHandler;
 import org.jim.bukkit.audit.entitylimit.EntityControl;
-import org.jim.bukkit.audit.menu.MenuCmd;
-import org.jim.bukkit.audit.menu.MenuModule;
-import org.jim.bukkit.audit.rcd.Rcd;
 import org.jim.bukkit.audit.rcd.RedstoneClockDetector;
 import org.jim.bukkit.audit.script.RunScript;
 import org.jim.bukkit.audit.skin.SkinModule;
 import org.jim.bukkit.audit.unbreaksign.UnbreakingSign;
 import org.jim.bukkit.audit.util.JavaPluginFix;
-import org.jim.bukkit.audit.util.Logs;
 
 /**
  * 本来是定位成XJCraft的考核插件，结果还加了一些乱七八糟的模块
