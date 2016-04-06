@@ -22,6 +22,7 @@ public class EntityControl extends IModule {
 	private Map<EntityType, Integer> entityLimit =
 			new HashMap<EntityType, Integer>();
 	private int radius = 100;
+	private final Logger log = AuditPlugin.getPlugin().getLogger();
 
 	public EntityControl(AuditPlugin plugin) {
 		super(plugin);
@@ -92,9 +93,8 @@ public class EntityControl extends IModule {
 			for (String line : list) {
 				String[] array = line.split("=", 2);
 				if (array.length >= 2) {
-					int typeId = Integer.parseInt(array[0].trim());
 					int count = Integer.parseInt(array[1].trim());
-					EntityType type = EntityType.fromId(typeId);
+					EntityType type = getEntityType(array[0].trim());
 					if (type != null) {
 						entityLimit.put(type, count);
 					}
@@ -110,7 +110,6 @@ public class EntityControl extends IModule {
 
 				@Override
 				public void run() {
-					Logger log = AuditPlugin.getPlugin().getLogger();
 					log.info("Entity clear Thread start");
 					for (Player player : Bukkit.getOnlinePlayers()) {
 						int t = EntityControl.getInstance().clear(player);
@@ -123,5 +122,27 @@ public class EntityControl extends IModule {
 			task.start(20l, 20 * conf.getInt("entityControl.interval"));
 		}
 
+	}
+	
+	private EntityType getEntityType(String nameOrId) {
+		EntityType type = EntityType.fromName(nameOrId);
+		if (type == null) {
+			try {
+				int id = Integer.parseInt(nameOrId);
+				type = EntityType.fromId(id);
+				
+				log.warning(String.format("[EntityLimit] You should not use ID: %d", id)); // 警告不应该使用 id, 而是应该使用名称
+				
+				if (type == null) {
+					log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity id", nameOrId)); // 警告加载这一项失败, 实体 id 不存在
+				} else {
+					log.warning(String.format("[EntityLimit] Please use the entity name: %s", type.getName())); // 警告不应该使用 id, 而是应该使用名称
+				}
+			} catch (NumberFormatException e) {
+				log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity name", nameOrId)); // 警告加载这一项失败, 未知的实体名
+			}
+		}
+		
+		return type;
 	}
 }
