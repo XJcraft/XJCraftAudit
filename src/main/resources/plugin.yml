@@ -57,5 +57,7 @@ permissions:
     default: op
   xjcraft.rename: 
     default: true
+  xjcraft.tp: 
+    default: op
   xjcraft.menu: 
     default: true
