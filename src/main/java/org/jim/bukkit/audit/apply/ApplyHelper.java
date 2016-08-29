@@ -230,6 +230,7 @@ public class ApplyHelper extends IModule {
 					return true;
 				}
 			});
+			getPlugin().getCommandHandler().register(new TP());
 		}
 	}
 
