@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.jim</groupId>
-    <artifactId>jim_</artifactId>
+    <artifactId>XJCraftAudit</artifactId>
     <version>1.4.0</version>
 
     <properties>
