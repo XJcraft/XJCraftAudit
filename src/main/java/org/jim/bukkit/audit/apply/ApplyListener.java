@@ -1,8 +1,5 @@
 package org.jim.bukkit.audit.apply;
 
-import java.util.HashSet;
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,12 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.SignChangeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,6 +23,9 @@ import org.jim.bukkit.audit.Status;
 import org.jim.bukkit.audit.util.Lang;
 import org.jim.bukkit.audit.util.Title;
 import org.jim.bukkit.audit.util.Util;
+
+import java.util.HashSet;
+import java.util.List;
 
 public class ApplyListener implements Listener {
 
@@ -81,7 +76,7 @@ public class ApplyListener implements Listener {
 	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Block clicked = event.getClickedBlock();
-		if (clicked == null || clicked.getType() != Material.COMMAND)
+		if (clicked == null || clicked.getType() != Material.COMMAND_BLOCK)
 			return;
 		// cmd block
 		CommandBlock cmb = (CommandBlock) event.getClickedBlock().getState();
@@ -104,7 +99,7 @@ public class ApplyListener implements Listener {
 		if (status == Status.APPLIED) {
 			// APPLIED状态下放置命令方块，传送点为备用出生点
 			Block cmdBlock = event.getBlock();
-			Util.change(cmdBlock, Material.COMMAND);
+			Util.change(cmdBlock, Material.COMMAND_BLOCK);
 			Util.setCmdBlock(cmdBlock, helper.getSpawn());
 			// add button
 			Util.addButton(cmdBlock);
@@ -117,7 +112,7 @@ public class ApplyListener implements Listener {
 					cmdBlock.getLocation());
 			// sign
 			BlockFace face = BlockFace.EAST;
-			HashSet<Byte> set = new HashSet<Byte>();
+			HashSet<Material> set = new HashSet<>();
 			List<Block> blocks = player.getLastTwoTargetBlocks(set, 10);
 			if (blocks.size() > 1) {
 				face = blocks.get(1).getFace(blocks.get(0));
@@ -139,7 +134,7 @@ public class ApplyListener implements Listener {
 		Player player = event.getPlayer();
 		Location location = player.getLocation();
 		Block depBlock = getSignDep(event.getBlock());
-		if (depBlock != null && depBlock.getType() == Material.COMMAND
+		if (depBlock != null && depBlock.getType() == Material.COMMAND_BLOCK
 				&& helper.getStatus(player) == Status.APPLIED_VILLAGE) {
 			CommandBlock cmdState = (CommandBlock) depBlock.getState();
 			if (Lang.isEmpty(cmdState.getCommand())) {

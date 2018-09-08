@@ -23,7 +23,7 @@ public class SignHandler {
 		}
 		// sign post
 		Block up = block.getRelative(BlockFace.UP);
-		if (Material.SIGN_POST == up.getType() && matchPattern(up)) {
+		if (Material.SIGN == up.getType() && matchPattern(up)) {
 			isProtected = true;
 			return;
 		}
@@ -55,6 +55,6 @@ public class SignHandler {
 
 	public static boolean isSign(Block block) {
 		return block != null && (Material.WALL_SIGN == block.getType()
-				|| Material.SIGN_POST == block.getType());
+				|| Material.SIGN == block.getType());
 	}
 }

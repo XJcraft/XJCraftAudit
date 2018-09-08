@@ -1,9 +1,5 @@
 package org.jim.bukkit.audit.util;
 
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,6 +9,9 @@ import org.bukkit.block.CommandBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jim.bukkit.audit.AuditPlugin;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Util {
 
@@ -26,13 +25,13 @@ public class Util {
 		// 上面 压力板
 		Block upBlock = block.getRelative(BlockFace.UP);
 		if (Material.AIR == upBlock.getType()) {
-			upBlock.setType(Material.WOOD_PLATE);
+            upBlock.setType(Material.OAK_PRESSURE_PLATE);
 			upBlock.getState().update();
 		}
 	}
 
 	public static void setCmdBlock(Block block, Location location) {
-		if (block.getType() == Material.COMMAND) {
+        if (block.getType() == Material.COMMAND_BLOCK) {
 			String line = AuditPlugin.getPlugin().getConfig()
 					.getString("cmd-line", "/tp @p[r=5] ${x} ${y} ${z}");
 			line = line.replace("${x}", location.getBlockX() + "");

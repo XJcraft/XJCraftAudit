@@ -1,8 +1,5 @@
 package org.jim.bukkit.audit.apply;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,6 +13,9 @@ import org.jim.bukkit.audit.cmds.ICmd;
 import org.jim.bukkit.audit.util.Assert;
 import org.jim.bukkit.audit.util.Lang;
 import org.jim.bukkit.audit.util.LocationUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Fix extends ICmd {
 
@@ -38,7 +38,7 @@ public class Fix extends ICmd {
 		// OfflinePlayer oplayer = Bukkit.getOfflinePlayer(args[1]);
 
 		// base town basecmd
-		Block cmd = getBlock(location, Material.COMMAND, radius);
+		Block cmd = getBlock(location, Material.COMMAND_BLOCK, radius);
 		Assert.notNull(cmd, String.format("未找到命令方块!(l: %s,r: %s)",
 				LocationUtil.toString(location), radius));
 
@@ -107,7 +107,7 @@ public class Fix extends ICmd {
 	}
 
 	public CommandBlock getCmdBlock(Location loc, int radius) {
-		Block block = getBlock(loc, Material.COMMAND, radius);
+		Block block = getBlock(loc, Material.COMMAND_BLOCK, radius);
 		return block == null ? null : (CommandBlock) block.getState();
 	}
 

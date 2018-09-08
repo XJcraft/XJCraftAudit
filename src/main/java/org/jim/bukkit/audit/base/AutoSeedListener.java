@@ -1,16 +1,6 @@
 package org.jim.bukkit.audit.base;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -22,6 +12,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jim.bukkit.audit.AuditPlugin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AutoSeedListener implements Listener {
 
@@ -36,7 +31,7 @@ public class AutoSeedListener implements Listener {
 		final Material material = event.getMaterial();
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
 				&& material == Material.STICK
-				&& clickBlock.getType() == Material.SOIL) {
+                && clickBlock.getType() == Material.LEGACY_SOIL) {
 			event.setCancelled(true);
 			Bukkit.getScheduler().runTaskAsynchronously(AuditPlugin.getPlugin(),
 					new Runnable() {
@@ -78,7 +73,7 @@ public class AutoSeedListener implements Listener {
 		int total = 0;
 		int remove = 0;
 		HashMap<Integer, ? extends ItemStack> map =
-				se.inventory.all(Material.SEEDS);
+                se.inventory.all(Material.WHEAT_SEEDS);
 		for (ItemStack stack : map.values())
 			total += stack.getAmount();
 		if (total == 0) {
@@ -87,7 +82,7 @@ public class AutoSeedListener implements Listener {
 			for (Block block : se.soils) {
 				Block up = block.getRelative(BlockFace.UP);
 				if (Material.AIR == up.getType() && --total >= 0) {
-					up.setType(Material.CROPS);
+                    up.setType(Material.LEGACY_CROPS);
 					remove++;
 					world.playSound(up.getLocation(),
 							Sound.ENTITY_PLAYER_LEVELUP, 0.1f, .2f);
@@ -99,7 +94,7 @@ public class AutoSeedListener implements Listener {
 					}
 				}
 			}
-			se.inventory.removeItem(new ItemStack(Material.SEEDS, remove));
+            se.inventory.removeItem(new ItemStack(Material.WHEAT_SEEDS, remove));
 			dropAll(se.clicked.getLocation(), se.inventory);
 		}
 
@@ -132,7 +127,7 @@ public class AutoSeedListener implements Listener {
 		// 向上
 		for (int i = 1; i < s; i++) {
 			b = b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ());
-			if (Material.SOIL == b.getType()) {
+            if (Material.LEGACY_SOIL == b.getType()) {
 				soils.add(b);
 				total++;
 			}
@@ -140,7 +135,7 @@ public class AutoSeedListener implements Listener {
 		// 向右
 		for (int i = 1; i < s; i++) {
 			b = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
-			if (Material.SOIL == b.getType()) {
+            if (Material.LEGACY_SOIL == b.getType()) {
 				soils.add(b);
 				total++;
 			}
@@ -148,7 +143,7 @@ public class AutoSeedListener implements Listener {
 		// 向下
 		for (int i = 1; i < s; i++) {
 			b = b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ());
-			if (Material.SOIL == b.getType()) {
+            if (Material.LEGACY_SOIL == b.getType()) {
 				soils.add(b);
 				total++;
 			}
@@ -156,7 +151,7 @@ public class AutoSeedListener implements Listener {
 		// 向左
 		for (int i = 1; i < s; i++) {
 			b = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
-			if (Material.SOIL == b.getType()) {
+            if (Material.LEGACY_SOIL == b.getType()) {
 				soils.add(b);
 				total++;
 			}

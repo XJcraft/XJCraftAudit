@@ -5,13 +5,13 @@
 ############################################################
 apply:
   enable: true
-  command-block: 35
+  command-block: WHITE_WOOL
 
 accept-armorContent:
-  - 310
-  - 311
-  - 312
-  - 313
+  - DIAMOND_HELMET
+  - DIAMOND_CHESTPLATE
+  - DIAMOND_LEGGINGS
+  - DIAMOND_BOOTS
   
 spawn:
   world: MainLand

@@ -1,23 +1,14 @@
 package org.jim.bukkit.audit.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.logging.Level;
-
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
+import java.io.*;
+import java.util.logging.Level;
 
 // 修复bukkit使用系统字符编码读取yaml配置
 public class YamlFix extends YamlConfiguration {
@@ -32,26 +23,26 @@ public class YamlFix extends YamlConfiguration {
 		load(new InputStreamReader(stream, Charsets.UTF_8));
 	}
 
-	@Override
-	public void load(InputStream stream)
-			throws IOException, InvalidConfigurationException {
-		InputStreamReader reader = new InputStreamReader(stream, charset);
-		StringBuilder builder = new StringBuilder();
-		BufferedReader input = new BufferedReader(reader);
-
-		try {
-			String line;
-
-			while ((line = input.readLine()) != null) {
-				builder.append(line);
-				builder.append('\n');
-			}
-		} finally {
-			input.close();
-		}
-
-		loadFromString(builder.toString());
-	}
+//	@Override
+//	public void load(InputStream stream)
+//			throws IOException, InvalidConfigurationException {
+//		InputStreamReader reader = new InputStreamReader(stream, charset);
+//		StringBuilder builder = new StringBuilder();
+//		BufferedReader input = new BufferedReader(reader);
+//
+//		try {
+//			String line;
+//
+//			while ((line = input.readLine()) != null) {
+//				builder.append(line);
+//				builder.append('\n');
+//			}
+//		} finally {
+//			input.close();
+//		}
+//
+//		loadFromString(builder.toString());
+//	}
 
 	/*
 	 * @Override public Object get(String path, Object def) { Object obj = super.get(path,null);

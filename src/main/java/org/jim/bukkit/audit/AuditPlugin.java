@@ -1,8 +1,5 @@
 package org.jim.bukkit.audit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
@@ -11,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.jim.bukkit.audit.apply.ApplyHelper;
 import org.jim.bukkit.audit.apply.MaterialAudit;
 import org.jim.bukkit.audit.apply.PlayerApplyEvent;
-import org.jim.bukkit.audit.base.AutoSeedListener;
 import org.jim.bukkit.audit.base.DefaultListener;
 import org.jim.bukkit.audit.cmds.CommandHandler;
 import org.jim.bukkit.audit.entitylimit.EntityControl;
@@ -20,6 +16,9 @@ import org.jim.bukkit.audit.script.RunScript;
 import org.jim.bukkit.audit.skin.SkinModule;
 import org.jim.bukkit.audit.unbreaksign.UnbreakingSign;
 import org.jim.bukkit.audit.util.JavaPluginFix;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 本来是定位成XJCraft的考核插件，结果还加了一些乱七八糟的模块
@@ -77,7 +76,7 @@ public class AuditPlugin extends JavaPluginFix {
 			m.onEnable();
 		}
 		registerEvents(new DefaultListener());
-		registerEvents(new AutoSeedListener());
+//		registerEvents(new AutoSeedListener());
 	}
 
 	public void registerEvents(Listener listener) {
@@ -90,7 +89,7 @@ public class AuditPlugin extends JavaPluginFix {
 		getLogger().info("Reloading " + getName());
 		materialAudit.clearMaterial();
 		materialAudit.addMaterials(
-				getConfig().getIntegerList("accept-armorContent"));
+				getConfig().getStringList("accept-armorContent"));
 		for (IModule m : modules)
 			m.reloadConfig();
 	}
