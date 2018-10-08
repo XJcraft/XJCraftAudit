@@ -85,7 +85,7 @@ public class ApplyListener implements Listener {
 				&& Lang.isEmpty(cmb.getCommand()) && helper.getStatus(
 						event.getPlayer()) == Status.APPLIED_VILLAGE) {
 			event.setUseItemInHand(Event.Result.ALLOW);
-			event.setUseInteractedBlock(Event.Result.DENY);
+//			event.setUseInteractedBlock(Event.Result.DENY);
 		}
 	}
 
