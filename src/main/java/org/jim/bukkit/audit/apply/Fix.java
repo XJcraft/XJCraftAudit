@@ -13,7 +13,6 @@ import org.jim.bukkit.audit.cmds.ICmd;
 import org.jim.bukkit.audit.util.Assert;
 import org.jim.bukkit.audit.util.Lang;
 import org.jim.bukkit.audit.util.LocationUtil;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

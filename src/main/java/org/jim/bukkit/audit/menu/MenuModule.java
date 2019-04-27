@@ -1,12 +1,11 @@
 package org.jim.bukkit.audit.menu;
 
+import org.jim.bukkit.audit.AuditPlugin;
+import org.jim.bukkit.audit.IModule;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import org.jim.bukkit.audit.AuditPlugin;
-import org.jim.bukkit.audit.IModule;
 
 public class MenuModule extends IModule {
 

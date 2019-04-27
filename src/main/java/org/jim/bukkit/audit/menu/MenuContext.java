@@ -1,15 +1,14 @@
 package org.jim.bukkit.audit.menu;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MenuContext {
 

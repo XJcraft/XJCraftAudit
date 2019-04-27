@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jim.bukkit.audit.util.Logs;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +21,7 @@ public class MaterialAudit {
 
 	public void addMaterial(Material m) {
 		materials.add(m);
-		Logs.info("Add audit metarial: " + m + "(" + m.getId() + ")");
+		Logs.info("Add audit metarial: " + m + "(" + m.getKey() + ")");
 	}
 
 	@SuppressWarnings("deprecation")

@@ -1,14 +1,13 @@
 package org.jim.bukkit.audit.apply;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.PlayerMeta;
 import org.jim.bukkit.audit.cmds.ICmd;
 import org.jim.bukkit.audit.util.LocationUtil;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Status extends ICmd {
 

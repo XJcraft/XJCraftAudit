@@ -1,13 +1,12 @@
 package org.jim.bukkit.audit.util;
 
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.MemorySection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.MemorySection;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public abstract class Storeable implements Serializable {
 

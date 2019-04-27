@@ -12,7 +12,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jim.bukkit.audit.AuditPlugin;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +51,7 @@ public class AutoSeedListener implements Listener {
 
 	@EventHandler
 	public void end(final InventoryCloseEvent event) {
-		if ("Planter".equals(event.getInventory().getTitle())
+		if ("Planter".equals(event.getView().getTitle())
 				&& session.containsKey(event.getPlayer().getName())) {
 			final SeedSession se = session.get(event.getPlayer().getName());
 			session.remove(se);

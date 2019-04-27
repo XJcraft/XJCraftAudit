@@ -1,14 +1,13 @@
 package org.jim.bukkit.audit.script;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.logging.Logger;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.jim.bukkit.audit.cmds.ICmd;
 import org.jim.bukkit.audit.util.Task;
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.logging.Logger;
 
 public class RunScriptCmd extends ICmd {
 

@@ -1,16 +1,15 @@
 package org.jim.bukkit.audit;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.MemorySection;
 import org.jim.bukkit.audit.util.LocationUtil;
 import org.jim.bukkit.audit.util.Storeable;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerMeta extends Storeable {
 

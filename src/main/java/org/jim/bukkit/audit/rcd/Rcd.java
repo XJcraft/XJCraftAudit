@@ -1,18 +1,13 @@
 package org.jim.bukkit.audit.rcd;
 
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.cmds.ICmd;
 import org.jim.bukkit.audit.util.LocationUtil;
+import java.lang.ref.SoftReference;
+import java.util.*;
 
 public class Rcd extends ICmd {
 

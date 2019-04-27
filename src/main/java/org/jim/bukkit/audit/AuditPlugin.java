@@ -16,7 +16,6 @@ import org.jim.bukkit.audit.script.RunScript;
 import org.jim.bukkit.audit.skin.SkinModule;
 import org.jim.bukkit.audit.unbreaksign.UnbreakingSign;
 import org.jim.bukkit.audit.util.JavaPluginFix;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -9,7 +9,6 @@ import org.bukkit.block.CommandBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jim.bukkit.audit.AuditPlugin;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

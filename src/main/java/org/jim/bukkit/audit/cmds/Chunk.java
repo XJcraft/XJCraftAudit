@@ -1,17 +1,12 @@
 package org.jim.bukkit.audit.cmds;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.jim.bukkit.audit.util.ChunkCount;
+import java.util.*;
 
 public class Chunk extends ICmd {
 
@@ -28,7 +23,7 @@ public class Chunk extends ICmd {
 						.toArray(new World[0]);
 				for (World world : worlds) {
 					for (org.bukkit.Chunk chunk : world.getLoadedChunks()) {
-						if (chunk.unload(true, true)) {
+						if (chunk.unload()) {
 							chunkcount++;
 						}
 					}

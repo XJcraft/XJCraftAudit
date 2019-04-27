@@ -1,8 +1,5 @@
 package org.jim.bukkit.audit.rcd;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -10,6 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.IModule;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RedstoneClockDetector extends IModule implements Listener {
 

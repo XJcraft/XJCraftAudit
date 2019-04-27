@@ -1,12 +1,5 @@
 package org.jim.bukkit.audit.cmds;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jim.bukkit.audit.AuditPlugin;
+import java.util.*;
 
 public class CommandHandler implements TabExecutor {
 	private static CommandHandler instance;

@@ -1,11 +1,10 @@
 package org.jim.bukkit.audit.util;
 
-import java.io.File;
-import java.io.InputStream;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * 修复Bukkit自带配置文件编码问题 统一使用UTF-8

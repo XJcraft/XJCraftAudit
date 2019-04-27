@@ -1,10 +1,5 @@
 package org.jim.bukkit.audit.entitylimit;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
@@ -14,6 +9,10 @@ import org.bukkit.entity.Player;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.IModule;
 import org.jim.bukkit.audit.util.Task;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
 public class EntityControl extends IModule {
 

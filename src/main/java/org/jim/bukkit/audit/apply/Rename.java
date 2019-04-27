@@ -1,8 +1,5 @@
 package org.jim.bukkit.audit.apply;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -11,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jim.bukkit.audit.cmds.ICmd;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Rename extends ICmd {
 

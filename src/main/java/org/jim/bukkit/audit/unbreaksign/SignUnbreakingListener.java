@@ -1,7 +1,5 @@
 package org.jim.bukkit.audit.unbreaksign;
 
-import java.util.Iterator;
-
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -13,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import java.util.Iterator;
 
 public class SignUnbreakingListener implements Listener {
 

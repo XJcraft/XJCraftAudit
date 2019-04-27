@@ -14,7 +14,6 @@ import org.jim.bukkit.audit.PlayerMeta;
 import org.jim.bukkit.audit.Status;
 import org.jim.bukkit.audit.util.Logs;
 import org.jim.bukkit.audit.util.Util;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
