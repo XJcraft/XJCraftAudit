@@ -106,9 +106,7 @@ public class Lang {
 	public static Block getSignDep(Block sign) {
 		if (!isWallSign(sign.getType()))
 			return null;
-		org.bukkit.material.Sign data =
-				(org.bukkit.material.Sign) sign.getState().getData();
-		BlockFace signFace = data.getFacing();
+		BlockFace signFace = ((org.bukkit.block.data.type.WallSign) sign.getBlockData()).getFacing();
 		return sign.getRelative(signFace.getOppositeFace());
 	}
 

@@ -90,8 +90,9 @@ public class ApplyListener implements Listener {
 
 	@EventHandler(ignoreCancelled = true)
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.getBlock().getType() != helper.getHomeBlock())
+		if (event.getBlock().getType() != helper.getHomeBlock()) {
 			return;
+		}
 		// 放置命令方块
 		Player player = event.getPlayer();
 		Status status = helper.getStatus(player);
@@ -214,12 +215,13 @@ public class ApplyListener implements Listener {
 		} else {
 			signBlock = target.getRelative(face);
 		}
-		if (signBlock.getType() != Material.AIR)
+		if (signBlock.getType() != Material.AIR) {
 			return;
+		}
 		signBlock.setType(Material.SPRUCE_WALL_SIGN);
 		Sign sign = (Sign) signBlock.getState();
 		sign.setLine(0, str);
-		((org.bukkit.material.Sign) sign.getData()).setFacingDirection(face);
+		((org.bukkit.block.data.type.WallSign) sign.getBlockData()).setFacing(face);
 		sign.update();
 	}
 

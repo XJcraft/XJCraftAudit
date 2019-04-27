@@ -31,15 +31,31 @@ public class Util {
 
 	public static void setCmdBlock(Block block, Location location) {
         if (block.getType() == Material.COMMAND_BLOCK) {
+        	Block safeBlock = getSafeBlock(location.getBlock());
+        	Location safeLocation = safeBlock.getLocation();
+
 			String line = AuditPlugin.getPlugin().getConfig()
-					.getString("cmd-line", "/tp @p[r=5] ${x} ${y} ${z}");
-			line = line.replace("${x}", location.getBlockX() + "");
-			line = line.replace("${y}", location.getBlockY() + "");
-			line = line.replace("${z}", location.getBlockZ() + "");
+					.getString("cmd-line", "/minecraft:tp @p[distance=0..5] ${x} ${y} ${z}");
+			line = line.replace("${x}", Integer.toString(safeLocation.getBlockX()));
+			line = line.replace("${y}", Integer.toString(safeLocation.getBlockY()));
+			line = line.replace("${z}", Integer.toString(safeLocation.getBlockZ()));
 			CommandBlock state = (CommandBlock) block.getState();
 			state.setCommand(line);
 			state.update();
 		}
+	}
+
+	/**
+	 * 寻找一个对玩家来说，可以安全的 tp 过去而不会导致窒息的方块
+	 * <p>会从目标方块开始向上搜寻</p>
+	 * @param block 目标方块
+	 * @return 搜索到的方块
+	 */
+	private static Block getSafeBlock(final Block block) {
+		if (block.getRelative(0, 1, 0).isPassable() && block.getRelative(0, 2, 0).isPassable()) {
+			return block;
+		}
+		return getSafeBlock(block.getRelative(0, 1, 0));
 	}
 
 	/*
