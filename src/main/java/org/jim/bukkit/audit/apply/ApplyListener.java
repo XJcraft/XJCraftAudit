@@ -81,7 +81,7 @@ public class ApplyListener implements Listener {
 		// cmd block
 		CommandBlock cmb = (CommandBlock) event.getClickedBlock().getState();
 		ItemStack item = event.getItem();
-		if (item != null && Material.SIGN == item.getType()
+        if (item != null && Material.LEGACY_SIGN == item.getType()
 				&& Lang.isEmpty(cmb.getCommand()) && helper.getStatus(
 						event.getPlayer()) == Status.APPLIED_VILLAGE) {
 			event.setUseItemInHand(Event.Result.ALLOW);
@@ -217,7 +217,7 @@ public class ApplyListener implements Listener {
 		}
 		if (signBlock.getType() != Material.AIR)
 			return;
-		signBlock.setType(Material.WALL_SIGN);
+        signBlock.setType(Material.LEGACY_WALL_SIGN);
 		Sign sign = (Sign) signBlock.getState();
 		sign.setLine(0, str);
 		((org.bukkit.material.Sign) sign.getData()).setFacingDirection(face);
@@ -241,7 +241,7 @@ public class ApplyListener implements Listener {
 	}
 
 	public ItemStack giveSignBlock(Player player) {
-		ItemStack sign = new ItemStack(Material.SIGN);
+        ItemStack sign = new ItemStack(Material.LEGACY_SIGN);
 		ItemMeta sItemMeta = sign.getItemMeta();
 		sItemMeta.setDisplayName(helper.getPlugin().getConfig()
 				.getString("signBlock.displayName"));

@@ -1,12 +1,12 @@
 package org.jim.bukkit.audit.util;
 
+import com.google.common.base.Charsets;
+import org.bukkit.craftbukkit.libs.org.apache.commons.io.IOUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import org.apache.commons.io.Charsets;
-import org.apache.commons.io.IOUtils;
 
 public class HttpUtil {
 

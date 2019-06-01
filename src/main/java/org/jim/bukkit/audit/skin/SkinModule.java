@@ -1,8 +1,26 @@
 package org.jim.bukkit.audit.skin;
 
+import com.google.common.base.Charsets;
+import com.google.gson.Gson;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.yggdrasil.response.MinecraftTexturesPayload;
+import org.bukkit.craftbukkit.libs.org.apache.commons.codec.binary.Base64;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.IModule;
+import org.jim.bukkit.audit.util.HttpUtil;
+import org.jim.bukkit.audit.util.Lang;
+import org.jim.bukkit.audit.util.Logs;
+import org.jim.bukkit.audit.util.ReflectUtil;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SkinModule extends IModule implements Listener {
 
@@ -21,7 +39,7 @@ public class SkinModule extends IModule implements Listener {
 
 	@Override
 	public void onDisable() {}
-/*
+
 	@EventHandler
 	public void onJoin(PlayerLoginEvent event) {
 		if (!enable)
@@ -34,6 +52,8 @@ public class SkinModule extends IModule implements Listener {
 			GameProfile g = (GameProfile) ReflectUtil.invokeMethod(ePlayer,
 					"getProfile");
 			fillGameProfile(g);
+			ReflectUtil.setValue(g, "legacy", false);
+
 			count = 0;
 		} catch (Exception e) {
 			count++;
@@ -63,7 +83,7 @@ public class SkinModule extends IModule implements Listener {
 		try {
 			MinecraftTexturesPayload payload = new MinecraftTexturesPayload();
 			Gson gson = new Gson();
-			String url = "http://bbs.xjcraft.org/api/skin/" + name;
+			String url = "https://www.xjcraft.org/api/skin/" + name;
 			String json = HttpUtil.get(url);
 
 			Map propertyMap = new HashMap();
@@ -98,7 +118,7 @@ public class SkinModule extends IModule implements Listener {
 			e.printStackTrace();
 			return new Property("textures", "");
 		}
-	}*/
+	}
 
 	// private static String decodeProperty(String value) {
 	// return new String(Base64.decodeBase64(value), Charsets.UTF_8);

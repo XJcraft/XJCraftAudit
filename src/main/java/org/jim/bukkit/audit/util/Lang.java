@@ -1,11 +1,5 @@
 package org.jim.bukkit.audit.util;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +13,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.jim.bukkit.audit.AuditPlugin;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class Lang {
 
@@ -75,7 +75,7 @@ public class Lang {
 	}
 
 	public static Block getSignDep(Block sign) {
-		if (sign.getType() != Material.WALL_SIGN)
+		if (sign.getType() != Material.LEGACY_WALL_SIGN)
 			return null;
 		org.bukkit.material.Sign data =
 				(org.bukkit.material.Sign) sign.getState().getData();

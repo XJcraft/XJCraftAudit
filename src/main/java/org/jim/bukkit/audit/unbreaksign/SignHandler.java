@@ -23,14 +23,14 @@ public class SignHandler {
 		}
 		// sign post
 		Block up = block.getRelative(BlockFace.UP);
-		if (Material.SIGN == up.getType() && matchPattern(up)) {
+		if (Material.LEGACY_SIGN == up.getType() && matchPattern(up)) {
 			isProtected = true;
 			return;
 		}
 		// wall sign
 		for (BlockFace face : FACES) {
 			Block near = block.getRelative(face);
-			if (Material.WALL_SIGN == near.getType()) {
+			if (Material.LEGACY_WALL_SIGN == near.getType()) {
 				Sign s = (Sign) near.getState();
 				if (matchPattern(s) && ((org.bukkit.material.Sign) s.getData())
 						.getFacing() == face) {
@@ -54,7 +54,7 @@ public class SignHandler {
 	}
 
 	public static boolean isSign(Block block) {
-		return block != null && (Material.WALL_SIGN == block.getType()
-				|| Material.SIGN == block.getType());
+		return block != null && (Material.LEGACY_WALL_SIGN == block.getType()
+				|| Material.LEGACY_SIGN == block.getType());
 	}
 }

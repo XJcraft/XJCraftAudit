@@ -4,14 +4,9 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jim.bukkit.audit.AuditPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,47 +20,47 @@ public class AutoSeedListener implements Listener {
 
 
 	// 拿着木棍右击耕地
-	@EventHandler(ignoreCancelled = true)
-	public void begin(final PlayerInteractEvent event) {
-		final Block clickBlock = event.getClickedBlock();
-		final Material material = event.getMaterial();
-		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
-				&& material == Material.STICK
-                && clickBlock.getType() == Material.LEGACY_SOIL) {
-			event.setCancelled(true);
-			Bukkit.getScheduler().runTaskAsynchronously(AuditPlugin.getPlugin(),
-					new Runnable() {
+//	@EventHandler(ignoreCancelled = true)
+//	public void begin(final PlayerInteractEvent event) {
+//		final Block clickBlock = event.getClickedBlock();
+//		final Material material = event.getMaterial();
+//		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+//				&& material == Material.STICK
+//                && clickBlock.getType() == Material.LEGACY_SOIL) {
+//			event.setCancelled(true);
+//			Bukkit.getScheduler().runTaskAsynchronously(AuditPlugin.getPlugin(),
+//					new Runnable() {
+//
+//						@Override
+//						public void run() {
+//							Inventory inventory = Bukkit.createInventory(
+//									event.getPlayer(), 9, "Planter");
+//							event.getPlayer().openInventory(inventory);
+//							SeedSession seed = new SeedSession(clickBlock);
+//							seed.inventory = inventory;
+//							session.put(event.getPlayer().getName(), seed);
+//						}
+//
+//					});
+//		}
+//	}
 
-						@Override
-						public void run() {
-							Inventory inventory = Bukkit.createInventory(
-									event.getPlayer(), 9, "Planter");
-							event.getPlayer().openInventory(inventory);
-							SeedSession seed = new SeedSession(clickBlock);
-							seed.inventory = inventory;
-							session.put(event.getPlayer().getName(), seed);
-						}
-
-					});
-		}
-	}
-
-	@EventHandler
-	public void end(final InventoryCloseEvent event) {
-		if ("Planter".equals(event.getInventory().getTitle())
-				&& session.containsKey(event.getPlayer().getName())) {
-			final SeedSession se = session.get(event.getPlayer().getName());
-			session.remove(se);
-			Bukkit.getScheduler().runTaskAsynchronously(AuditPlugin.getPlugin(),
-					new Runnable() {
-
-						@Override
-						public void run() {
-							sessionHandle(se, (Player) event.getPlayer());
-						}
-					});
-		}
-	}
+//	@EventHandler
+//	public void end(final InventoryCloseEvent event) {
+//		if ("Planter".equals(event.getInventory().getTitle())
+//				&& session.containsKey(event.getPlayer().getName())) {
+//			final SeedSession se = session.get(event.getPlayer().getName());
+//			session.remove(se);
+//			Bukkit.getScheduler().runTaskAsynchronously(AuditPlugin.getPlugin(),
+//					new Runnable() {
+//
+//						@Override
+//						public void run() {
+//							sessionHandle(se, (Player) event.getPlayer());
+//						}
+//					});
+//		}
+//	}
 
 	private void sessionHandle(SeedSession se, Player player) {
 		World world = player.getWorld();
