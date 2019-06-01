@@ -75,7 +75,7 @@ public class Lang {
 	}
 
 	public static Block getSignDep(Block sign) {
-		if (sign.getType() != Material.LEGACY_WALL_SIGN)
+		if (sign.getType() != Material.OAK_WALL_SIGN)
 			return null;
 		org.bukkit.material.Sign data =
 				(org.bukkit.material.Sign) sign.getState().getData();
