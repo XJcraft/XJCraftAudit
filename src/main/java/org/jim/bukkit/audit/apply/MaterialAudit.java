@@ -22,7 +22,7 @@ public class MaterialAudit {
 
 	public void addMaterial(Material m) {
 		materials.add(m);
-		Logs.info("Add audit metarial: " + m + "(" + m.getId() + ")");
+        Logs.info("Add audit metarial: " + m + "(" + m.name() + ")");
 	}
 
 	@SuppressWarnings("deprecation")
