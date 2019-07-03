@@ -33,7 +33,7 @@ public class SkinModule extends IModule implements Listener {
 
 	@Override
 	public void onEnable() {
-		enable = true;
+		enable = false;
 		getPlugin().registerEvents(this);
 	}
 
@@ -59,8 +59,8 @@ public class SkinModule extends IModule implements Listener {
 			count++;
 			e.printStackTrace();
 		}
-		if (count > 10) {
-			Logs.info("error count > 10 ,close skin module");
+		if (count > 3) {
+			Logs.info("error count > 3 ,close skin module");
 			enable = false;
 		}
 	}
