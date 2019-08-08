@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class MaterialAudit {
 
-	private Set<Material> materials = new HashSet<Material>();
+	private Set<Material> materials = new HashSet<>();
 
 	public void addMaterial(Material m) {
 		materials.add(m);

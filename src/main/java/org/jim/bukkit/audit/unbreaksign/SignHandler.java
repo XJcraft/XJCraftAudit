@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
+import org.jim.bukkit.audit.util.Lang;
 
 public class SignHandler {
 
@@ -23,14 +24,14 @@ public class SignHandler {
 		}
 		// sign post
 		Block up = block.getRelative(BlockFace.UP);
-		if (Material.OAK_SIGN == up.getType() && matchPattern(up)) {
+		if (Lang.isSign(up.getType()) && matchPattern(up)) {
 			isProtected = true;
 			return;
 		}
 		// wall sign
 		for (BlockFace face : FACES) {
 			Block near = block.getRelative(face);
-			if (Material.OAK_WALL_SIGN == near.getType()) {
+			if (Lang.isWallSign(near.getType())) {
 				Sign s = (Sign) near.getState();
 				if (matchPattern(s) && ((org.bukkit.material.Sign) s.getData())
 						.getFacing() == face) {
@@ -46,7 +47,7 @@ public class SignHandler {
 	}
 
 	protected static boolean matchPattern(Block block) {
-		return isSign(block) ? matchPattern((Sign) block.getState()) : false;
+		return isSign(block) && matchPattern((Sign) block.getState());
 	}
 
 	protected static boolean matchPattern(Sign sign) {
@@ -54,7 +55,6 @@ public class SignHandler {
 	}
 
 	public static boolean isSign(Block block) {
-		return block != null && (Material.OAK_WALL_SIGN == block.getType()
-				|| Material.OAK_SIGN == block.getType());
+		return block != null && (Lang.isSign(block.getType()) || Lang.isWallSign(block.getType()));
 	}
 }
