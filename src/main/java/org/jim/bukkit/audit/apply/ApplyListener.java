@@ -91,8 +91,9 @@ public class ApplyListener implements Listener {
 
 	@EventHandler(ignoreCancelled = true)
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.getBlock().getType() != helper.getHomeBlock())
+		if (event.getBlock().getType() != helper.getHomeBlock()) {
 			return;
+		}
 		// 放置命令方块
 		Player player = event.getPlayer();
 		Status status = helper.getStatus(player);
