@@ -42,7 +42,7 @@ public class MaterialAudit {
 	}
 
 	public ItemStack[] accept(ItemStack[] items) {
-		List<ItemStack> unaccepts = new ArrayList<ItemStack>();
+		List<ItemStack> unaccepts = new ArrayList<>();
 		for (ItemStack item : items) {
 			if (item == null) {
 				unaccepts.add(item);

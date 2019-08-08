@@ -39,7 +39,7 @@ public class Title {
 	private boolean ticks = false;
 
 	private static final Map<Class<?>, Class<?>> CORRESPONDING_TYPES =
-			new HashMap<Class<?>, Class<?>>();
+			new HashMap<>();
 
 	/**
 	 * Create a new 1.8 title

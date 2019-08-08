@@ -20,7 +20,7 @@ public class EntityControl extends IModule {
 	private static EntityControl instance = null;
 	private Task task;
 	private Map<EntityType, Integer> entityLimit =
-			new HashMap<EntityType, Integer>();
+			new HashMap<>();
 	private int radius = 100;
 	private final Logger log = AuditPlugin.getPlugin().getLogger();
 
@@ -39,9 +39,7 @@ public class EntityControl extends IModule {
 	}
 
 	public Map<EntityType, Integer> getLimit() {
-		Map<EntityType, Integer> map = new HashMap<EntityType, Integer>();
-		map.putAll(entityLimit);
-		return map;
+		return new HashMap<>(entityLimit);
 	}
 
 	public int clear(Player player) {
@@ -119,11 +117,11 @@ public class EntityControl extends IModule {
 					log.info("Entity clear Thread stop");
 				}
 			};
-			task.start(20l, 20 * conf.getInt("entityControl.interval"));
+			task.start(20L, 20 * conf.getInt("entityControl.interval"));
 		}
 
 	}
-	
+
 	private EntityType getEntityType(String nameOrId) {
 		EntityType type = EntityType.fromName(nameOrId);
 		if (type == null) {

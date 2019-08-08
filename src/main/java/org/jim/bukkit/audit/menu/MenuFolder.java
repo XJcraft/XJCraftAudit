@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MenuFolder extends MenuItem {
 
-	private List<MenuItem> childs = new ArrayList<MenuItem>();
+	private List<MenuItem> childs = new ArrayList<>();
 
 	public MenuFolder(String label) {
 		super(label);

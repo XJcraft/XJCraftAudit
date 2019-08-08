@@ -55,8 +55,7 @@ public class CommandHandler implements TabExecutor {
 			if (sub != null && sender.hasPermission(sub.permission())) {
 				String[] params = new String[0];
 				if (args.length >= 2) {
-					LinkedList<String> list = new LinkedList<>();
-					list.addAll(Arrays.asList(args));
+					LinkedList<String> list = new LinkedList<>(Arrays.asList(args));
 					list.removeFirst();
 					params = list.toArray(new String[list.size()]);
 				}

@@ -32,12 +32,12 @@ public class AuditPlugin extends JavaPluginFix {
 	public ApplyHelper helper = null;
 
 	private static AuditPlugin instance;
-	private List<IModule> modules = new ArrayList<IModule>() {
+	private List<IModule> modules = new ArrayList<>() {
 		public boolean add(IModule e) {
 			AuditPlugin.instance.getLogger()
 					.info("Add Module :" + e.getClass());
 			return super.add(e);
-		};
+		}
 	};
 	private CommandHandler commandHandler;
 

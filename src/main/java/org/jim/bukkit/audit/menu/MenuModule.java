@@ -11,7 +11,7 @@ import org.jim.bukkit.audit.IModule;
 public class MenuModule extends IModule {
 
 	private MenuFolder root;
-	private Map<UUID, MenuContext> menus = new HashMap<UUID, MenuContext>();
+	private Map<UUID, MenuContext> menus = new HashMap<>();
 
 	public MenuModule(AuditPlugin plugin) {
 		super(plugin);
@@ -37,32 +37,32 @@ public class MenuModule extends IModule {
 			File f = new File(System.getProperty("user.dir"));
 			root = new MenuFolder(f.getName());
 			iterate(root, f);
-			root.addItem(new MenuItem("Exit", new OnClickListener() {
-
-				@Override
-				public boolean onClick(MenuContext context) {
-					context.unload();
-					return true;
-				}
+			root.addItem(new MenuItem("Exit", context -> {
+				context.unload();
+				return true;
 			}));
 		}
 		return root;
 	}
 
 	private void iterate(MenuFolder menu, File f) {
-		for (File file : f.listFiles()) {
-			if (file.getName().length() > 13)
-				continue;
-			if (file.isDirectory()) {
-				MenuFolder m = new MenuFolder(file.getName());
-				m.setOnClickListener(MenuItem.enter);
-				menu.addItem(m);
-				iterate(m, file);
-			} else {
-				MenuItem m = new MenuItem(file.getName());
-				menu.addItem(m);
+		File[] files = f.listFiles();
+		if (files != null) {
+			for (File file : files) {
+				if (file.getName().length() > 13)
+					continue;
+				if (file.isDirectory()) {
+					MenuFolder m = new MenuFolder(file.getName());
+					m.setOnClickListener(MenuItem.enter);
+					menu.addItem(m);
+					iterate(m, file);
+				} else {
+					MenuItem m = new MenuItem(file.getName());
+					menu.addItem(m);
+				}
 			}
 		}
+
 		menu.addItem(new MenuItem("Back", MenuItem.back));
 	}
 
