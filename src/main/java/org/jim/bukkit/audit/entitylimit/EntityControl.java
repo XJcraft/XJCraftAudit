@@ -16,11 +16,9 @@ import org.jim.bukkit.audit.IModule;
 import org.jim.bukkit.audit.util.Task;
 
 public class EntityControl extends IModule {
-
 	private static EntityControl instance = null;
 	private Task task;
-	private Map<EntityType, Integer> entityLimit =
-			new HashMap<>();
+	private Map<EntityType, Integer> entityLimit = new HashMap<>();
 	private int radius = 100;
 	private final Logger log = AuditPlugin.getPlugin().getLogger();
 
@@ -49,7 +47,7 @@ public class EntityControl extends IModule {
 	public int clear(Player player, int radius) {
 		Map<EntityType, Integer> map = getLimit();
 		int total = 0;
-		for (Entity entity : player.getNearbyEntities(radius, 255d, radius)) {
+		for (Entity entity : player.getNearbyEntities(radius, 255.0, radius)) {
 			Integer count = map.get(entity.getType());
 			if (count != null) {
 				if (count > 0) {
@@ -92,9 +90,9 @@ public class EntityControl extends IModule {
 				String[] array = line.split("=", 2);
 				if (array.length >= 2) {
 					int count = Integer.parseInt(array[1].trim());
-					EntityType type = getEntityType(array[0].trim());
+					EntityType type = this.getEntityType(array[0].trim());
 					if (type != null) {
-						entityLimit.put(type, count);
+						this.entityLimit.put(type, count);
 					}
 				}
 			}
@@ -102,10 +100,10 @@ public class EntityControl extends IModule {
 		// instance = new EntityControl(entityLimit);
 		getPlugin().getLogger().info("limit: " + entityLimit);
 		radius = conf.getInt("entityControl.radius");
+		Task.stop(task); // 停止清理任务
+		// 如果设置了开启清理任务，则启动清理任务
 		if (conf.getBoolean("entityControl.autoClear", false)) {
-			Task.stop(task);
 			task = new Task(AuditPlugin.getPlugin()) {
-
 				@Override
 				public void run() {
 					log.info("Entity clear Thread start");
@@ -122,25 +120,13 @@ public class EntityControl extends IModule {
 
 	}
 
-	private EntityType getEntityType(String nameOrId) {
-		EntityType type = EntityType.fromName(nameOrId);
+	private EntityType getEntityType(String name) {
+		EntityType type = EntityType.fromName(name);
 		if (type == null) {
-			try {
-				int id = Integer.parseInt(nameOrId);
-				type = EntityType.fromId(id);
-				
-				log.warning(String.format("[EntityLimit] You should not use ID: %d", id)); // 警告不应该使用 id, 而是应该使用名称
-				
-				if (type == null) {
-					log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity id", nameOrId)); // 警告加载这一项失败, 实体 id 不存在
-				} else {
-					log.warning(String.format("[EntityLimit] Please use the entity name: %s", type.getName())); // 警告不应该使用 id, 而是应该使用名称
-				}
-			} catch (NumberFormatException e) {
-				log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity name", nameOrId)); // 警告加载这一项失败, 未知的实体名
-			}
+			// 警告加载这一项失败, 未知的实体名
+			log.warning(String.format("[EntityLimit] Failed to load %s, unknown entity name", name));
 		}
-		
+
 		return type;
 	}
 }
