@@ -11,11 +11,11 @@ public class Help extends ICmd {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		StringBuffer str = new StringBuffer();
+		StringBuilder str = new StringBuilder();
 		str.append("----- XJCraft Command List ------\n");
 		for (ICmd cmd : CommandHandler.getInstance().getCommands().values()) {
 			if (sender.hasPermission(cmd.permission()) && cmd.isShow()) {
-				str.append(cmd.toHelp() + "\n");
+				str.append(cmd.toHelp()).append('\n');
 			}
 		}
 		sender.sendMessage(str.toString());

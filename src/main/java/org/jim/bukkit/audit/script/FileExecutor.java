@@ -11,16 +11,14 @@ public class FileExecutor {
 
 	public FileExecutor(File dir) {
 		if (dir.isDirectory()) {
-			File[] files = dir.listFiles(new FilenameFilter() {
-
-				@Override
-				public boolean accept(File dir, String name) {
-					name = name.toLowerCase();
-					return name.endsWith(".bat") && name.endsWith(".sh");
-				}
+			File[] files = dir.listFiles((dir1, name) -> {
+				name = name.toLowerCase();
+				return name.endsWith(".bat") && name.endsWith(".sh");
 			});
-			for (File f : files) {
-				exec(f);
+			if (files != null) {
+				for (File f : files) {
+					exec(f);
+				}
 			}
 		}
 	}
@@ -67,7 +65,7 @@ public class FileExecutor {
 	private void log(String msg) {
 		if (logger != null) {
 			try {
-				logger.append(" >" + msg + "\n");
+				logger.append(" >").append(msg).append('\n');
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -3,22 +3,14 @@ package org.jim.bukkit.audit.menu;
 
 public class MenuItem {
 
-	public static final OnClickListener back = new OnClickListener() {
-
-		@Override
-		public boolean onClick(MenuContext context) {
-			context.back();
-			return true;
-		}
+	public static final OnClickListener back = context -> {
+		context.back();
+		return true;
 	};
 
-	public static final OnClickListener enter = new OnClickListener() {
-
-		@Override
-		public boolean onClick(MenuContext context) {
-			context.click();
-			return true;
-		}
+	public static final OnClickListener enter = context -> {
+		context.click();
+		return true;
 	};
 
 	boolean enabled = true;

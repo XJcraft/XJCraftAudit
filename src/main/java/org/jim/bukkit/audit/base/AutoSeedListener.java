@@ -16,7 +16,7 @@ import java.util.Map;
 public class AutoSeedListener implements Listener {
 
 	private Map<String, SeedSession> session =
-			new HashMap<String, SeedSession>();
+			new HashMap<>();
 
 
 	// 拿着木棍右击耕地
@@ -105,7 +105,7 @@ public class AutoSeedListener implements Listener {
 	}
 
 	public static List<Block> searchSoils(Block block) {
-		List<Block> soils = new ArrayList<Block>();
+		List<Block> soils = new ArrayList<>();
 		soils.add(block);
 		int x = 1;
 		boolean search = true;
@@ -154,7 +154,7 @@ public class AutoSeedListener implements Listener {
 		return total > 0;
 	}
 
-	class SeedSession {
+	static class SeedSession {
 		Block clicked;
 		List<Block> soils;
 		Inventory inventory;

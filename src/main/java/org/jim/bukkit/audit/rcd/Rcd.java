@@ -52,26 +52,21 @@ public class Rcd extends ICmd {
 		sender.sendMessage("正在检测红石信号...需用时： " + ChatColor.YELLOW + query.second
 				+ ChatColor.WHITE + "秒");
 		sender.getServer().getScheduler().runTaskLater(AuditPlugin.getPlugin(),
-				new Runnable() {
-
-					@Override
-					public void run() {
-						rcd.setEnable(false);
-						query.record = new TreeSet<>(rcd.getRecords().values());
-						rcd.clearRecords();
-						query.time = System.currentTimeMillis();
-						show(sender, query);
-					}
-
-				}, query.second * 20l);
+				() -> {
+					rcd.setEnable(false);
+					query.record = new TreeSet<>(rcd.getRecords().values());
+					rcd.clearRecords();
+					query.time = System.currentTimeMillis();
+					show(sender, query);
+				}, query.second * 20L);
 	}
 
 	public void show(CommandSender sender, QueryRecord query) {
-		cache.put(sender.getName(), new SoftReference<QueryRecord>(query));
+		cache.put(sender.getName(), new SoftReference<>(query));
 		int start = (query.pageNum - 1) * pageSize;
 		int end = query.pageNum * pageSize;
 		int current = 0;
-		long ticks = query.second * 20l;
+		long ticks = query.second * 20L;
 		sender.sendMessage(String.format(
 				"-------Restone clock detector(Statistics used: %ds,Record: %d,Page:%d/%d)------",
 				query.second, query.record.size(), query.pageNum,
@@ -100,21 +95,21 @@ public class Rcd extends ICmd {
 	public int getInt(String[] array, int index, int def) {
 		if (array == null || index < 0 || index > array.length)
 			return def;
-		int value = def;
+		int value;
 		try {
-			value = Integer.valueOf(array[index]);
+			value = Integer.parseInt(array[index]);
 		} catch (Exception e) {
 			value = def;
 		}
 		return value;
 	}
 
-	private class QueryRecord {
+	private static class QueryRecord {
 		int pageNum;
 		int second;
 		// int ticks;
 		Set<RedstoneClockDetector.RestoneRecord> record;
-		Long time = 0l;
+		Long time = 0L;
 
 		public QueryRecord(int pageNum, int second) {
 			super();

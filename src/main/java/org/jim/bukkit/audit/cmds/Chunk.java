@@ -41,7 +41,7 @@ public class Chunk extends ICmd {
 
 				}
 				Map<org.bukkit.Chunk, ChunkCount> map =
-						new HashMap<org.bukkit.Chunk, ChunkCount>();
+						new HashMap<>();
 				for (World world : Bukkit.getWorlds()) {
 					for (Entity entity : world.getEntities()) {
 						org.bukkit.Chunk c = entity.getLocation().getChunk();
@@ -54,17 +54,19 @@ public class Chunk extends ICmd {
 					}
 				}
 				Set<ChunkCount> set = new TreeSet<>(map.values());
-				StringBuffer m = new StringBuffer();
+				StringBuilder m = new StringBuilder();
 				Iterator<ChunkCount> it = set.iterator();
 				m.append("------ Chunk Info ------\n");
 				while (num > 0 && it.hasNext()) {
 					ChunkCount c = it.next();
-					m.append("Chunk" + ChatColor.BLUE + "[World:"
-							+ c.getChunk().getWorld().getName() + ",x:"
-							+ c.getChunk().getX() + ",z:" + c.getChunk().getZ()
-							+ "]" + ChatColor.WHITE + "  Entitys: "
-							+ ChatColor.RED + c.getCount() + ChatColor.WHITE
-							+ "\n");
+					m.append("Chunk").append(ChatColor.BLUE)
+							.append("[World:").append(c.getChunk().getWorld().getName())
+							.append(",x:").append(c.getChunk().getX())
+							.append(",z:").append(c.getChunk().getZ())
+							.append("]").append(ChatColor.WHITE)
+							.append("  Entitys: ")
+							.append(ChatColor.RED).append(c.getCount())
+							.append(ChatColor.WHITE).append('\n');
 					num--;
 				}
 				sender.sendMessage(m.toString());

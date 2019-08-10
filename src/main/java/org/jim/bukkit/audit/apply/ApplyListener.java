@@ -81,7 +81,7 @@ public class ApplyListener implements Listener {
 		// cmd block
 		CommandBlock cmb = (CommandBlock) event.getClickedBlock().getState();
 		ItemStack item = event.getItem();
-        if (item != null && Material.OAK_SIGN == item.getType()
+        if (item != null && Lang.isSign(item.getType())
 				&& Lang.isEmpty(cmb.getCommand()) && helper.getStatus(
 						event.getPlayer()) == Status.APPLIED_VILLAGE) {
 			event.setUseItemInHand(Event.Result.ALLOW);
@@ -91,8 +91,9 @@ public class ApplyListener implements Listener {
 
 	@EventHandler(ignoreCancelled = true)
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.getBlock().getType() != helper.getHomeBlock())
+		if (event.getBlock().getType() != helper.getHomeBlock()) {
 			return;
+		}
 		// 放置命令方块
 		Player player = event.getPlayer();
 		Status status = helper.getStatus(player);
@@ -209,7 +210,7 @@ public class ApplyListener implements Listener {
 	}
 
 	public void addSign2(Block target, BlockFace face, String str) {
-		Block signBlock = null;
+		Block signBlock;
 		if (Material.AIR == target.getType()) {
 			signBlock = target;
 		} else {

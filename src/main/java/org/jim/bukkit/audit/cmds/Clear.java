@@ -16,7 +16,7 @@ public class Clear extends ICmd {
 	public boolean onCommand(CommandSender sender, String[] args) {
 		Player player = Lang.getRealPlayer(sender, args);
 		if (player != null) {
-			Integer radius = EntityControl.getInstance().getRadius();
+			int radius = EntityControl.getInstance().getRadius();
 			if (args != null && args.length >= 2) {
 				try {
 					radius = Integer.parseInt(args[1]);

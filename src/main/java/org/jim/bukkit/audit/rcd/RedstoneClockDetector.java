@@ -63,7 +63,7 @@ public class RedstoneClockDetector extends IModule implements Listener {
 		}
 	}
 
-	public class RestoneRecord implements Comparable<RestoneRecord> {
+	public static class RestoneRecord implements Comparable<RestoneRecord> {
 
 		Location location;
 		int count = 0;

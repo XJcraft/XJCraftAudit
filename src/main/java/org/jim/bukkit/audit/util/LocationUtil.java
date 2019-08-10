@@ -39,10 +39,9 @@ public class LocationUtil {
 		int x = yaml.getInt(prefix + ".x");
 		int y = yaml.getInt(prefix + ".y");
 		int z = yaml.getInt(prefix + ".z");
-		Double pitch = yaml.getDouble(prefix + ".pitch");
-		Double yaw = yaml.getDouble(prefix + ".yaw");
-		return new Location(world, x, y, z, yaw.floatValue(),
-				pitch.floatValue());
+		float pitch = (float) yaml.getDouble(prefix + ".pitch");
+		float yaw = (float) yaml.getDouble(prefix + ".yaw");
+		return new Location(world, x, y, z, yaw, pitch);
 	}
 
 	public static LocationRef getLocationRef(MemorySection yaml,

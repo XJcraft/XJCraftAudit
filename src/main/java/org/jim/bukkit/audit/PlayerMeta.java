@@ -17,7 +17,7 @@ public class PlayerMeta extends Storeable {
 	private Status status = Status.UNAPPLIED;
 	private long applyTime;
 	private Map<String, LocationRef> locations =
-			new HashMap<String, LocationRef>();
+			new HashMap<>();
 	private File dataFile;
 	private String player;
 

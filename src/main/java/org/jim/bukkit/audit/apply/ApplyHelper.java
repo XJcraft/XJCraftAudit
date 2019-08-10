@@ -31,7 +31,7 @@ public class ApplyHelper extends IModule {
 	public static final String LOCATION_CMDBASE = "base-cmdlocation";
 
 	private Map<String, SoftReference<PlayerMeta>> metas =
-			new HashMap<String, SoftReference<PlayerMeta>>();
+			new HashMap<>();
 	private AuditPlugin plugin;
 	private File conf = null;
 	private Location spawn;
@@ -163,7 +163,7 @@ public class ApplyHelper extends IModule {
 			meta = new PlayerMeta();
 			meta.setPlayer(player);
 			meta.setDataFile(new File(conf, player + ".yml"));
-			metas.put(player, new SoftReference<PlayerMeta>(meta));
+			metas.put(player, new SoftReference<>(meta));
 		}
 		return meta;
 	}
@@ -185,7 +185,7 @@ public class ApplyHelper extends IModule {
 				try {
 					pm.load(metaFile);
 					metas.put(name.toLowerCase(),
-							new SoftReference<PlayerMeta>(pm));
+							new SoftReference<>(pm));
 				} catch (IOException | InvalidConfigurationException e) {
 					e.printStackTrace();
 					return null;
@@ -196,9 +196,12 @@ public class ApplyHelper extends IModule {
 	};
 
 	public File getFile(File dir, String name) {
-		for (String f : dir.list())
-			if (f.equalsIgnoreCase(name))
-				return new File(conf, name);
+		String[] files = dir.list();
+		if (files != null) {
+			for (String f : files)
+				if (f.equalsIgnoreCase(name))
+					return new File(conf, name);
+		}
 		return null;
 	}
 
@@ -213,22 +216,17 @@ public class ApplyHelper extends IModule {
 			getPlugin().getCommandHandler()
 					.register(new org.jim.bukkit.audit.apply.Status());
 			getPlugin().getCommandHandler().register(new Rename());
-			getPlugin().getCommand("rename").setExecutor(new CommandExecutor() {
-
-				@Override
-				public boolean onCommand(CommandSender sender, Command command,
-						String label, String[] args) {
-					if (!(sender instanceof Player))
-						return true;
-					if (args.length == 0 || "help".equalsIgnoreCase(args[0])) {
-						sender.sendMessage(
-								"/rename [name] <lore[,]>   消耗一根羽毛，给一张纸改名");
-						return true;
-					}
-					Rename.rename((Player) sender, args[0],
-							args.length > 1 ? args[1] : null);
+			getPlugin().getCommand("rename").setExecutor((sender, command, label, args) -> {
+				if (!(sender instanceof Player))
+					return true;
+				if (args.length == 0 || "help".equalsIgnoreCase(args[0])) {
+					sender.sendMessage(
+							"/rename [name] <lore[,]>   消耗一根羽毛，给一张纸改名");
 					return true;
 				}
+				Rename.rename((Player) sender, args[0],
+						args.length > 1 ? args[1] : null);
+				return true;
 			});
 			getPlugin().getCommandHandler().register(new TP());
 		}
@@ -245,9 +243,9 @@ public class ApplyHelper extends IModule {
 
 		homeBlock =
 				Material.getMaterial(getConfig().getString("apply.command-block"));
-		Integer x = getPlugin().getConfig().getInt("spawn.x");
-		Integer y = getPlugin().getConfig().getInt("spawn.y");
-		Integer z = getPlugin().getConfig().getInt("spawn.z");
+		int x = getPlugin().getConfig().getInt("spawn.x");
+		int y = getPlugin().getConfig().getInt("spawn.y");
+		int z = getPlugin().getConfig().getInt("spawn.z");
 		World world = getPlugin().getServer().getWorld(
 				getPlugin().getConfig().getString("spawn.world", "world"));
 		if (world == null) {
@@ -290,22 +288,18 @@ public class ApplyHelper extends IModule {
 				.getBoolean("nickname-prefix.enable", true))
 			return;
 
-		AuditPlugin.getPlugin().submit(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					if (p.isOp()) {
-						Util.setDisplayName(p, "nickname-prefix.op");
-					} else if (AuditPlugin.getPlugin().getHelper().isApply(p)) {
-						Util.setDisplayName(p, "nickname-prefix.applied");
-					} else {
-						Util.setDisplayName(p, "nickname-prefix.unapplied");
-					}
-				} catch (Exception e) {
-					AuditPlugin.getPlugin().getLogger().log(Level.WARNING,
-							"Set nickname for " + p.getName() + " error", e);
+		AuditPlugin.getPlugin().submit(() -> {
+			try {
+				if (p.isOp()) {
+					Util.setDisplayName(p, "nickname-prefix.op");
+				} else if (AuditPlugin.getPlugin().getHelper().isApply(p)) {
+					Util.setDisplayName(p, "nickname-prefix.applied");
+				} else {
+					Util.setDisplayName(p, "nickname-prefix.unapplied");
 				}
+			} catch (Exception e) {
+				AuditPlugin.getPlugin().getLogger().log(Level.WARNING,
+						"Set nickname for " + p.getName() + " error", e);
 			}
 		});
 

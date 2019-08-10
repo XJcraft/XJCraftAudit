@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class MaterialAudit {
 
-	private Set<Material> materials = new HashSet<Material>();
+	private Set<Material> materials = new HashSet<>();
 
 	public void addMaterial(Material m) {
 		materials.add(m);
@@ -42,7 +42,7 @@ public class MaterialAudit {
 	}
 
 	public ItemStack[] accept(ItemStack[] items) {
-		List<ItemStack> unaccepts = new ArrayList<ItemStack>();
+		List<ItemStack> unaccepts = new ArrayList<>();
 		for (ItemStack item : items) {
 			if (item == null) {
 				unaccepts.add(item);

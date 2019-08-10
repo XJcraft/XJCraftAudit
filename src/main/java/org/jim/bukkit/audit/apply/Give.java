@@ -26,7 +26,7 @@ public class Give extends ICmd {
 		Status s = null;
 		try {
 			s = (args != null && args.length > 1)
-					? Status.get(Integer.valueOf(args[1])) : Status.UNAPPLIED;
+					? Status.get(Integer.parseInt(args[1])) : Status.UNAPPLIED;
 		} catch (NumberFormatException e) {
 			// e.printStackTrace();
 		}

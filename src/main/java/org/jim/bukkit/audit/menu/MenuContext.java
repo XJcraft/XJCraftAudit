@@ -84,7 +84,7 @@ public class MenuContext {
 		}
 	}
 
-	private Set<String> scoreCache = new HashSet<String>();
+	private Set<String> scoreCache = new HashSet<>();
 
 	private void reset() {
 		for (String name : scoreCache) {
