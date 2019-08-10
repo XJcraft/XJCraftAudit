@@ -12,49 +12,48 @@ import java.util.Set;
 
 /**
  * 检验装备的审核
- * 
- * @author jimliang
  *
+ * @author jimliang
  */
 public class MaterialAudit {
 
-	private Set<Material> materials = new HashSet<>();
+    private Set<Material> materials = new HashSet<>();
 
-	public void addMaterial(Material m) {
-		materials.add(m);
+    public void addMaterial(Material m) {
+        materials.add(m);
         Logs.info("Add audit metarial: " + m + "(" + m.name() + ")");
-	}
+    }
 
-	@SuppressWarnings("deprecation")
-	public void addMaterial(String type) {
-		if (type != null)
-			addMaterial(Material.getMaterial(type));
-	}
+    @SuppressWarnings("deprecation")
+    public void addMaterial(String type) {
+        if (type != null)
+            addMaterial(Material.getMaterial(type));
+    }
 
-	public void clearMaterial() {
-		materials.clear();
-	}
+    public void clearMaterial() {
+        materials.clear();
+    }
 
-	public void addMaterials(List<String> types) {
-		if (types != null)
-			for (String i : types)
-				addMaterial(i);
-	}
+    public void addMaterials(List<String> types) {
+        if (types != null)
+            for (String i : types)
+                addMaterial(i);
+    }
 
-	public ItemStack[] accept(ItemStack[] items) {
-		List<ItemStack> unaccepts = new ArrayList<>();
-		for (ItemStack item : items) {
-			if (item == null) {
-				unaccepts.add(item);
-			} else if (!materials.contains(item.getType())) {
-				unaccepts.add(item);
-			}
-		}
-		return unaccepts.toArray(new ItemStack[0]);
-	}
+    public ItemStack[] accept(ItemStack[] items) {
+        List<ItemStack> unaccepts = new ArrayList<>();
+        for (ItemStack item : items) {
+            if (item == null) {
+                unaccepts.add(item);
+            } else if (!materials.contains(item.getType())) {
+                unaccepts.add(item);
+            }
+        }
+        return unaccepts.toArray(new ItemStack[0]);
+    }
 
-	public ItemStack[] accept(Player player) {
-		return accept(player.getInventory().getArmorContents());
-	}
+    public ItemStack[] accept(Player player) {
+        return accept(player.getInventory().getArmorContents());
+    }
 
 }

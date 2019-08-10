@@ -15,11 +15,11 @@ import java.util.Map;
 
 public class AutoSeedListener implements Listener {
 
-	private Map<String, SeedSession> session =
-			new HashMap<>();
+    private Map<String, SeedSession> session =
+            new HashMap<>();
 
 
-	// 拿着木棍右击耕地
+    // 拿着木棍右击耕地
 //	@EventHandler(ignoreCancelled = true)
 //	public void begin(final PlayerInteractEvent event) {
 //		final Block clickBlock = event.getClickedBlock();
@@ -62,108 +62,108 @@ public class AutoSeedListener implements Listener {
 //		}
 //	}
 
-	private void sessionHandle(SeedSession se, Player player) {
-		World world = player.getWorld();
-		// Location location = player.getLocation();
-		int total = 0;
-		int remove = 0;
-		HashMap<Integer, ? extends ItemStack> map =
+    private void sessionHandle(SeedSession se, Player player) {
+        World world = player.getWorld();
+        // Location location = player.getLocation();
+        int total = 0;
+        int remove = 0;
+        HashMap<Integer, ? extends ItemStack> map =
                 se.inventory.all(Material.WHEAT_SEEDS);
-		for (ItemStack stack : map.values())
-			total += stack.getAmount();
-		if (total == 0) {
-			dropAll(se.clicked.getLocation(), se.inventory);
-		} else {
-			for (Block block : se.soils) {
-				Block up = block.getRelative(BlockFace.UP);
-				if (Material.AIR == up.getType() && --total >= 0) {
+        for (ItemStack stack : map.values())
+            total += stack.getAmount();
+        if (total == 0) {
+            dropAll(se.clicked.getLocation(), se.inventory);
+        } else {
+            for (Block block : se.soils) {
+                Block up = block.getRelative(BlockFace.UP);
+                if (Material.AIR == up.getType() && --total >= 0) {
                     up.setType(Material.LEGACY_CROPS);
-					remove++;
-					world.playSound(up.getLocation(),
-							Sound.ENTITY_PLAYER_LEVELUP, 0.1f, .2f);
-					world.playEffect(up.getLocation(), Effect.SMOKE, 0);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
+                    remove++;
+                    world.playSound(up.getLocation(),
+                            Sound.ENTITY_PLAYER_LEVELUP, 0.1f, .2f);
+                    world.playEffect(up.getLocation(), Effect.SMOKE, 0);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             se.inventory.removeItem(new ItemStack(Material.WHEAT_SEEDS, remove));
-			dropAll(se.clicked.getLocation(), se.inventory);
-		}
+            dropAll(se.clicked.getLocation(), se.inventory);
+        }
 
-	}
+    }
 
-	public void dropAll(Location location, Inventory inventory) {
-		for (ItemStack st : inventory.getContents()) {
-			if (st != null && st.getType() != Material.AIR) {
-				location.getWorld().dropItem(location, st);
-			}
-		}
-		inventory.clear();
-	}
+    public void dropAll(Location location, Inventory inventory) {
+        for (ItemStack st : inventory.getContents()) {
+            if (st != null && st.getType() != Material.AIR) {
+                location.getWorld().dropItem(location, st);
+            }
+        }
+        inventory.clear();
+    }
 
-	public static List<Block> searchSoils(Block block) {
-		List<Block> soils = new ArrayList<>();
-		soils.add(block);
-		int x = 1;
-		boolean search = true;
-		while (search) {
-			search = search(soils, block, x++);
-		}
-		return soils;
-	}
+    public static List<Block> searchSoils(Block block) {
+        List<Block> soils = new ArrayList<>();
+        soils.add(block);
+        int x = 1;
+        boolean search = true;
+        while (search) {
+            search = search(soils, block, x++);
+        }
+        return soils;
+    }
 
-	private static boolean search(List<Block> soils, Block block, int x) {
-		int total = 0;
-		int s = 1 + 2 * x;// 边长
-		Block b = block.getRelative(-x, 0, -x);// 左下
-		// 向上
-		for (int i = 1; i < s; i++) {
-			b = b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ());
+    private static boolean search(List<Block> soils, Block block, int x) {
+        int total = 0;
+        int s = 1 + 2 * x;// 边长
+        Block b = block.getRelative(-x, 0, -x);// 左下
+        // 向上
+        for (int i = 1; i < s; i++) {
+            b = b.getWorld().getBlockAt(b.getX() + 1, b.getY(), b.getZ());
             if (Material.LEGACY_SOIL == b.getType()) {
-				soils.add(b);
-				total++;
-			}
-		}
-		// 向右
-		for (int i = 1; i < s; i++) {
-			b = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
+                soils.add(b);
+                total++;
+            }
+        }
+        // 向右
+        for (int i = 1; i < s; i++) {
+            b = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() + 1);
             if (Material.LEGACY_SOIL == b.getType()) {
-				soils.add(b);
-				total++;
-			}
-		}
-		// 向下
-		for (int i = 1; i < s; i++) {
-			b = b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ());
+                soils.add(b);
+                total++;
+            }
+        }
+        // 向下
+        for (int i = 1; i < s; i++) {
+            b = b.getWorld().getBlockAt(b.getX() - 1, b.getY(), b.getZ());
             if (Material.LEGACY_SOIL == b.getType()) {
-				soils.add(b);
-				total++;
-			}
-		}
-		// 向左
-		for (int i = 1; i < s; i++) {
-			b = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
+                soils.add(b);
+                total++;
+            }
+        }
+        // 向左
+        for (int i = 1; i < s; i++) {
+            b = b.getWorld().getBlockAt(b.getX(), b.getY(), b.getZ() - 1);
             if (Material.LEGACY_SOIL == b.getType()) {
-				soils.add(b);
-				total++;
-			}
-		}
-		return total > 0;
-	}
+                soils.add(b);
+                total++;
+            }
+        }
+        return total > 0;
+    }
 
-	static class SeedSession {
-		Block clicked;
-		List<Block> soils;
-		Inventory inventory;
+    static class SeedSession {
+        Block clicked;
+        List<Block> soils;
+        Inventory inventory;
 
-		public SeedSession(Block clicked) {
-			super();
-			this.clicked = clicked;
-			soils = AutoSeedListener.searchSoils(clicked);
-		}
+        public SeedSession(Block clicked) {
+            super();
+            this.clicked = clicked;
+            soils = AutoSeedListener.searchSoils(clicked);
+        }
 
-	}
+    }
 }

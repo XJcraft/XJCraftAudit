@@ -6,7 +6,7 @@
 
     <groupId>org.jim</groupId>
     <artifactId>XJCraftAudit</artifactId>
-    <version>1.4.2</version>
+    <version>1.4.4</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,8 +68,9 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>${bukkit.version}</version>
-            <scope>provided</scope>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

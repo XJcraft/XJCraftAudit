@@ -80,5 +80,6 @@ message:
   applyDup: 你已经通过审核了，不必再申请?
   broadcast: <player> 通过了考核
   passageCompleted: 成功建立基地-小镇的双向通道
+  passageOccupied: 此方块已经被占用，请寻找其他空方块
   baseNotExit: 基地不存在
   tip: 请保持背包有两个空位再申请考核

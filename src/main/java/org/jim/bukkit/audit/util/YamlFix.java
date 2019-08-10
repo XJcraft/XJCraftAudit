@@ -7,21 +7,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
 import java.util.logging.Level;
 
 // 修复bukkit使用系统字符编码读取yaml配置
 public class YamlFix extends YamlConfiguration {
 
-	private String charset = "UTF-8";
+    private String charset = "UTF-8";
 
-	@Override
-	public void load(File file) throws FileNotFoundException, IOException,
-			InvalidConfigurationException {
-		final FileInputStream stream = new FileInputStream(file);
+    @Override
+    public void load(File file) throws FileNotFoundException, IOException,
+            InvalidConfigurationException {
+        final FileInputStream stream = new FileInputStream(file);
 
-		load(new InputStreamReader(stream, Charsets.UTF_8));
-	}
+        load(new InputStreamReader(stream, Charsets.UTF_8));
+    }
 
 //	@Override
 //	public void load(InputStream stream)
@@ -44,62 +43,62 @@ public class YamlFix extends YamlConfiguration {
 //		loadFromString(builder.toString());
 //	}
 
-	/*
-	 * @Override public Object get(String path, Object def) { Object obj = super.get(path,null);
-	 * if(obj == null ){ set(path, def); } return def; }
-	 */
+    /*
+     * @Override public Object get(String path, Object def) { Object obj = super.get(path,null);
+     * if(obj == null ){ set(path, def); } return def; }
+     */
 
-	public static YamlConfiguration loadConfigurationFix(InputStream stream) {
-		Validate.notNull(stream, "Stream cannot be null");
+    public static YamlConfiguration loadConfigurationFix(InputStream stream) {
+        Validate.notNull(stream, "Stream cannot be null");
 
-		YamlConfiguration config = new YamlFix();
-		try {
-			// config.load(stream);
-			config.load(new InputStreamReader(stream, Charsets.UTF_8));
-		} catch (IOException ex) {
-			Bukkit.getLogger().log(Level.SEVERE,
-					"Cannot load configuration from stream", ex);
-		} catch (InvalidConfigurationException ex) {
-			Bukkit.getLogger().log(Level.SEVERE,
-					"Cannot load configuration from stream", ex);
-		}
+        YamlConfiguration config = new YamlFix();
+        try {
+            // config.load(stream);
+            config.load(new InputStreamReader(stream, Charsets.UTF_8));
+        } catch (IOException ex) {
+            Bukkit.getLogger().log(Level.SEVERE,
+                    "Cannot load configuration from stream", ex);
+        } catch (InvalidConfigurationException ex) {
+            Bukkit.getLogger().log(Level.SEVERE,
+                    "Cannot load configuration from stream", ex);
+        }
 
-		return config;
-	}
+        return config;
+    }
 
-	public static YamlConfiguration loadConfigurationFix(File file) {
-		Validate.notNull(file, "File cannot be null");
+    public static YamlConfiguration loadConfigurationFix(File file) {
+        Validate.notNull(file, "File cannot be null");
 
-		YamlConfiguration config = new YamlFix();
+        YamlConfiguration config = new YamlFix();
 
-		try {
-			config.load(file);
-		} catch (FileNotFoundException ex) {
-		} catch (IOException ex) {
-			Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);
-		} catch (InvalidConfigurationException ex) {
-			Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);
-		}
+        try {
+            config.load(file);
+        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
+            Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);
+        } catch (InvalidConfigurationException ex) {
+            Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);
+        }
 
-		return config;
-	}
+        return config;
+    }
 
-	@Override
-	public void save(File file) throws IOException {
-		Validate.notNull(file, "File cannot be null");
+    @Override
+    public void save(File file) throws IOException {
+        Validate.notNull(file, "File cannot be null");
 
-		Files.createParentDirs(file);
+        Files.createParentDirs(file);
 
-		String data = saveToString();
+        String data = saveToString();
 
-		OutputStreamWriter writer =
-				new OutputStreamWriter(new FileOutputStream(file), charset);
+        OutputStreamWriter writer =
+                new OutputStreamWriter(new FileOutputStream(file), charset);
 
-		try {
-			writer.write(data);
-			writer.flush();
-		} finally {
-			writer.close();
-		}
-	}
+        try {
+            writer.write(data);
+            writer.flush();
+        } finally {
+            writer.close();
+        }
+    }
 }

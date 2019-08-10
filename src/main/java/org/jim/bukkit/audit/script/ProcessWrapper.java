@@ -5,36 +5,36 @@ import java.io.IOException;
 
 public class ProcessWrapper {
 
-	private Process process;
+    private Process process;
 
-	public ProcessWrapper(Process process) {
+    public ProcessWrapper(Process process) {
 
-		this.process = process;
-	}
+        this.process = process;
+    }
 
-	public Process getRawProcess() {
-		return this.process;
-	}
+    public Process getRawProcess() {
+        return this.process;
+    }
 
-	public void start() throws IOException {
-		new Thread(new ProcessMonitor(this)).start();
-	}
+    public void start() throws IOException {
+        new Thread(new ProcessMonitor(this)).start();
+    }
 
-	public void log(String msg) {
+    public void log(String msg) {
 
-	}
+    }
 
-	public void stop() {
-		if (process != null)
-			this.process.destroy();
-	}
+    public void stop() {
+        if (process != null)
+            this.process.destroy();
+    }
 
-	public boolean isRunning() {
-		try {
-			this.process.exitValue();
-		} catch (IllegalThreadStateException ex) {
-			return true;
-		}
-		return false;
-	}
+    public boolean isRunning() {
+        try {
+            this.process.exitValue();
+        } catch (IllegalThreadStateException ex) {
+            return true;
+        }
+        return false;
+    }
 }

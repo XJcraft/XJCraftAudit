@@ -4,24 +4,33 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public abstract class IModule {
 
-	private AuditPlugin plugin;
+    private AuditPlugin plugin;
 
-	public void onEnable() {};
+    public void onEnable() {
+    }
 
-	public void onDisable() {};
+    ;
 
-	public void reloadConfig() {};
+    public void onDisable() {
+    }
 
-	public IModule(AuditPlugin plugin) {
-		super();
-		this.plugin = plugin;
-	}
+    ;
 
-	public AuditPlugin getPlugin() {
-		return plugin;
-	}
+    public void reloadConfig() {
+    }
 
-	public FileConfiguration getConfig() {
-		return getPlugin().getConfig();
-	}
+    ;
+
+    public IModule(AuditPlugin plugin) {
+        super();
+        this.plugin = plugin;
+    }
+
+    public AuditPlugin getPlugin() {
+        return plugin;
+    }
+
+    public FileConfiguration getConfig() {
+        return getPlugin().getConfig();
+    }
 }
