@@ -1,25 +1,24 @@
 package org.jim.bukkit.audit.util;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 
 // 修复bukkit使用系统字符编码读取yaml配置
 public class YamlFix extends YamlConfiguration {
 
-    private String charset = "UTF-8";
-
     @Override
-    public void load(File file) throws FileNotFoundException, IOException,
+    public void load(File file) throws IOException,
             InvalidConfigurationException {
         final FileInputStream stream = new FileInputStream(file);
 
-        load(new InputStreamReader(stream, Charsets.UTF_8));
+        load(new InputStreamReader(stream, StandardCharsets.UTF_8));
     }
 
 //	@Override
@@ -54,7 +53,7 @@ public class YamlFix extends YamlConfiguration {
         YamlConfiguration config = new YamlFix();
         try {
             // config.load(stream);
-            config.load(new InputStreamReader(stream, Charsets.UTF_8));
+            config.load(new InputStreamReader(stream, StandardCharsets.UTF_8));
         } catch (IOException ex) {
             Bukkit.getLogger().log(Level.SEVERE,
                     "Cannot load configuration from stream", ex);
@@ -92,7 +91,7 @@ public class YamlFix extends YamlConfiguration {
         String data = saveToString();
 
         OutputStreamWriter writer =
-                new OutputStreamWriter(new FileOutputStream(file), charset);
+                new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
 
         try {
             writer.write(data);

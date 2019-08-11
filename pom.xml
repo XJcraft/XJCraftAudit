@@ -68,9 +68,8 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>LATEST</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/spigot.jar</systemPath>
+            <version>${bukkit.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
