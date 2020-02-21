@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.*;
 import java.util.logging.Level;
 
 // 修复bukkit使用系统字符编码读取yaml配置

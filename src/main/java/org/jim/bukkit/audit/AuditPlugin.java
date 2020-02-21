@@ -31,7 +31,7 @@ public class AuditPlugin extends JavaPluginFix {
     public ApplyHelper helper = null;
 
     private static AuditPlugin instance;
-    private List<IModule> modules = new ArrayList<>() {
+    private List<IModule> modules = new ArrayList<IModule>() {
         public boolean add(IModule e) {
             AuditPlugin.instance.getLogger()
                     .info("Add Module :" + e.getClass());

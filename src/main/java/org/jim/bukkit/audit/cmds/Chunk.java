@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.jim.bukkit.audit.util.ChunkCount;
 
+import java.util.*;
+
 public class Chunk extends ICmd {
 
     public Chunk() {
