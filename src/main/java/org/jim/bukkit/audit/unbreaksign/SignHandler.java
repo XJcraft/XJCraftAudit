@@ -32,7 +32,7 @@ public class SignHandler {
             Block near = block.getRelative(face);
             if (Lang.isWallSign(near.getType())) {
                 Sign s = (Sign) near.getState();
-                if (matchPattern(s) && ((org.bukkit.material.Sign) s.getData())
+                if (matchPattern(s) && ((org.bukkit.block.data.type.WallSign) s.getBlockData())
                         .getFacing() == face) {
                     isProtected = true;
                     return;

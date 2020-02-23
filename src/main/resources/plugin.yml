@@ -29,7 +29,7 @@ permissions:
   xjcraft.check: 
     default: op
   xjcraft.checkall: 
-    default: op
+    default: true
   xjcraft.help: 
     default: true
   xjcraft.chunk: 

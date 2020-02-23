@@ -227,7 +227,7 @@ public class ApplyListener implements Listener {
         signBlock.setType(Material.OAK_WALL_SIGN);
         Sign sign = (Sign) signBlock.getState();
         sign.setLine(0, str);
-        ((org.bukkit.block.data.type.Sign) sign.getBlockData()).setRotation(face);
+        ((org.bukkit.block.data.type.WallSign) sign.getBlockData()).setFacing(face);
         sign.update();
     }
 
