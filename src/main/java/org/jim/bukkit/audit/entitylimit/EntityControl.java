@@ -2,10 +2,7 @@ package org.jim.bukkit.audit.entitylimit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.IModule;
 import org.jim.bukkit.audit.util.Task;
@@ -56,6 +53,8 @@ public class EntityControl extends IModule {
                     if (entity instanceof LivingEntity) {
                         LivingEntity l = (LivingEntity) entity;
                         if (l.getCustomName() != null) {
+                            continue;
+                        } else if (entity instanceof Raider && ((Raider) entity).isPatrolLeader()) {
                             continue;
                         }
                     }
