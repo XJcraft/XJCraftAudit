@@ -10,7 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <bukkit.version>1.14.4-R0.1-SNAPSHOT</bukkit.version>
+        <bukkit.version>1.16.4-R0.1-SNAPSHOT</bukkit.version>
     </properties>
 
     <build>
@@ -46,31 +46,30 @@
 
     <dependencies>
         <!--Spigot API-->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>${bukkit.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.spigotmc</groupId>-->
+        <!--            <artifactId>spigot-api</artifactId>-->
+        <!--            <version>${bukkit.version}</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
         <!--Bukkit API-->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>${bukkit.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.bukkit</groupId>-->
+        <!--            <artifactId>bukkit</artifactId>-->
+        <!--            <version>${bukkit.version}</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>LATEST</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/spigot.jar</systemPath>
+            <artifactId>spigot-api</artifactId>
+            <version>[1.16.4-R0.1-SNAPSHOT,)</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
