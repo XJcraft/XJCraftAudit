@@ -106,13 +106,12 @@ public class EntityControl extends IModule {
             task = new Task(AuditPlugin.getPlugin()) {
                 @Override
                 public void run() {
-                    log.info("Entity clear Thread start");
+//                    log.info("Entity clear Thread start");
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         int t = EntityControl.getInstance().clear(player);
-                        log.info("Clear " + player.getName()
-                                + " NearbyEntities --> " + t);
+//                        log.info("Clear " + player.getName() + " NearbyEntities --> " + t);
                     }
-                    log.info("Entity clear Thread stop");
+//                    log.info("Entity clear Thread stop");
                 }
             };
             task.start(20L, 20 * conf.getInt("entityControl.interval"));

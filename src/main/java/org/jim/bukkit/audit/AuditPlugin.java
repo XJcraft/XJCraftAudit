@@ -13,7 +13,6 @@ import org.jim.bukkit.audit.cmds.CommandHandler;
 import org.jim.bukkit.audit.entitylimit.EntityControl;
 import org.jim.bukkit.audit.rcd.RedstoneClockDetector;
 import org.jim.bukkit.audit.script.RunScript;
-import org.jim.bukkit.audit.skin.SkinModule;
 import org.jim.bukkit.audit.unbreaksign.UnbreakingSign;
 import org.jim.bukkit.audit.util.JavaPluginFix;
 
@@ -54,7 +53,7 @@ public class AuditPlugin extends JavaPluginFix {
         modules.add(new UnbreakingSign(this));
         modules.add(new RunScript(this));
         modules.add(new EntityControl(this));
-        modules.add(new SkinModule(this));
+//        modules.add(new SkinModule(this));
         modules.add(new RedstoneClockDetector(this));
     }
 

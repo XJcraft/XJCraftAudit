@@ -1,26 +1,8 @@
 package org.jim.bukkit.audit.skin;
 
-import com.google.common.base.Charsets;
-import com.google.gson.Gson;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.properties.Property;
-import com.mojang.authlib.yggdrasil.response.MinecraftTexturesPayload;
-import org.bukkit.craftbukkit.libs.org.apache.commons.codec.binary.Base64;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.jim.bukkit.audit.AuditPlugin;
 import org.jim.bukkit.audit.IModule;
-import org.jim.bukkit.audit.util.HttpUtil;
-import org.jim.bukkit.audit.util.Lang;
-import org.jim.bukkit.audit.util.Logs;
-import org.jim.bukkit.audit.util.ReflectUtil;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SkinModule extends IModule implements Listener {
 
@@ -41,7 +23,7 @@ public class SkinModule extends IModule implements Listener {
     public void onDisable() {
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onJoin(PlayerLoginEvent event) {
         if (!enable)
             return;
@@ -119,7 +101,7 @@ public class SkinModule extends IModule implements Listener {
             e.printStackTrace();
             return new Property("textures", "");
         }
-    }
+    }*/
 
     // private static String decodeProperty(String value) {
     // return new String(Base64.decodeBase64(value), Charsets.UTF_8);
