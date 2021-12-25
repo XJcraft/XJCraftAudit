@@ -78,11 +78,5 @@
             <scope>system</scope>
             <systemPath>M:/Minecraft/Buildtools/spigot-1.18.1.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>
