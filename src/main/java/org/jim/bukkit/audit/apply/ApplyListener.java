@@ -44,10 +44,15 @@ public class ApplyListener implements Listener {
         if (event.isBedSpawn())
             return;
         // 通过考核并且没有床出生
-        if (helper.isApply(player) && !event.isBedSpawn()
+        boolean hasApply = helper.isApply(player);
+        if (hasApply && !event.isBedSpawn()
                 && helper.isSpawn(event.getRespawnLocation().getWorld())) {
             event.setRespawnLocation(helper.getRespawn(player).clone());
+        } else if (!event.isBedSpawn()) {
+            event.setRespawnLocation(event.getRespawnLocation().getWorld().getSpawnLocation());
         }
+
+
     }
 
     @EventHandler
