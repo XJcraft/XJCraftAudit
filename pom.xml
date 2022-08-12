@@ -71,12 +71,19 @@
             <version>[1.18.1-R0.1-SNAPSHOT,)</version>
             <scope>provided</scope>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.spigotmc</groupId>-->
+        <!--            <artifactId>spigot</artifactId>-->
+        <!--            <version>1.19.2-R0.1-SNAPSHOT</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>M:/Minecraft/Buildtools/spigot-1.19.2.jar</systemPath>-->
+        <!--        </dependency>-->
+
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>M:/Minecraft/Buildtools/spigot-1.18.1.jar</systemPath>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

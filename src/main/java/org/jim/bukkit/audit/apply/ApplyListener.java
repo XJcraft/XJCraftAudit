@@ -21,7 +21,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jim.bukkit.audit.Status;
 import org.jim.bukkit.audit.util.Lang;
-import org.jim.bukkit.audit.util.Title;
 import org.jim.bukkit.audit.util.Util;
 
 import java.util.HashSet;
@@ -164,10 +163,9 @@ public class ApplyListener implements Listener {
                 // add button
                 Util.addButton(depBlock);
                 helper.setStatus(player, Status.APPLIED_VILLAGE_BASE);
-                new Title("恭喜发财!",
+                player.sendTitle("恭喜发财!",
                         ChatColor.AQUA + helper.getPlugin()
-                                .getMessage("message.passageCompleted"))
-                        .send(player);
+                                .getMessage("message.passageCompleted"));
             } else {
                 event.getBlock().setType(Material.AIR);
                 player.getInventory().addItem(new ItemStack(Material.OAK_SIGN));
@@ -198,8 +196,7 @@ public class ApplyListener implements Listener {
                     giveCmdBlock(player);
                     player.sendMessage(helper.getPlugin()
                             .getMessage("message.applySuccess"));
-                    new Title("审核通过!", ChatColor.AQUA + "请查看背包，并赶紧建立小镇和基地的双向传送")
-                            .send(player);
+                    player.sendTitle("审核通过!", ChatColor.AQUA + "请查看背包，并赶紧建立小镇和基地的双向传送");
                     // broadcast
                     String m =
                             helper.getPlugin().getMessage("message.broadcast")
