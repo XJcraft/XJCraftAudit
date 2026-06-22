@@ -10,9 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.jim.bukkit.audit.AuditPlugin;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public class Util {
 
 
@@ -76,10 +73,9 @@ public class Util {
      * }
      */
 
-    public static void setDisplayName(Player p, String str) throws Exception {
-        String nick =
-                p.getDisplayName() == null ? p.getName() : p.getDisplayName();
-        String prefix = AuditPlugin.getPlugin().getConfig().getString(str);
+    public static void setDisplayName(Player p, String pfxType) throws Exception {
+        String nick = p.getName();
+        String prefix = AuditPlugin.getPlugin().getConfig().getString(pfxType);
         prefix = prefix.replace('&', ChatColor.COLOR_CHAR);
         String output = prefix + nick + ChatColor.RESET;
         p.setDisplayName(output);
@@ -89,7 +85,7 @@ public class Util {
         if (output.length() > 16) {
             output = lastCode(prefix) + nick;// 去掉后缀仍过长，保留前缀最后的ChatColor
         }
-        if ((output.length() > 16)) {
+        if (output.length() > 16) {
             output = lastCode(prefix) + nick.substring(0, 14);// nickName截掉了，保留前缀最后的ChatColor
         }
         if (output.charAt(output.length() - 1) == '§') {// 若以§结尾则去掉
@@ -132,33 +128,6 @@ public class Util {
      * @Override public void run() { SamePlayerMerge s = new SamePlayerMerge(); try {
      * s.testMerge(dir); } catch (Exception e) { e.printStackTrace(); } } }); }
      */
-    public static BufferedImage scaleImage(BufferedImage image, int width,
-                                           int height, boolean checks) {
-        // if ((checks) && (Config.SIZE_CENTER) && (image.getWidth() < width) && (image.getHeight()
-        // < height)) return image;
-        if ((image.getWidth() == width) && (image.getHeight() == height))
-            return image;
-        float ratio = image.getHeight() / image.getWidth();
-        int newWidth = width;
-        int newHeight = height;
-        if (checks) {
-            newHeight = (int) (newWidth * ratio);
-            if (newHeight > height) {
-                newHeight = height;
-                newWidth = (int) (newHeight / ratio);
-            }
-        }
-
-        BufferedImage resized =
-                new BufferedImage(newWidth, newHeight, image.getType());
-        Graphics2D g = resized.createGraphics();
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g.drawImage(image, 0, 0, newWidth, newHeight, 0, 0, image.getWidth(),
-                image.getHeight(), null);
-        g.dispose();
-        return resized;
-    }
 
     public static void change(Block cmdBlock, Material command) {
         if (cmdBlock != null && cmdBlock.getType() != command) {
